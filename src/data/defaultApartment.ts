@@ -33,7 +33,7 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
     name: "Familie Harms",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
     phone: "+49 (0) 171 4589230",
-    email: "alex.harms93.AH@gmail.com",
+    email: "harms.mail@web.de",
     bio: "Wir sind eine junge Familie, die hier an der Ostsee aufgewachsen ist und die Region liebt. Wir haben die Ferienwohnung Anfang 2025 frisch renoviert und möchten Ihnen einen perfekten Ausgangspunkt für alle Ostseestrände von Fehmarn bis Grömitz bieten!",
     responseTime: "Antwortet meist innerhalb einer Stunde",
     languages: ["Deutsch", "Englisch"],
