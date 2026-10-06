@@ -39,7 +39,7 @@ export function AmenitiesSection({ amenities }: AmenitiesSectionProps) {
             Ausstattung für Ihren Rundum-Wohlfühlurlaub
           </h2>
           <p className="text-stone-600 mt-2 text-base">
-            Von der voll ausgestatteten Küche über schnelles Glasfaser-Internet bis hin zum privaten E-Bike-Ladeplatz.
+            Von der voll ausgestatteten Küche über schnelles Glasfaser-Internet.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export function AmenitiesSection({ amenities }: AmenitiesSectionProps) {
         <div className="mt-8 p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs sm:text-sm text-stone-700 flex items-center gap-3">
           <Check className="w-5 h-5 text-amber-800 shrink-0" />
           <span>
-            <strong>Bettwäsche & Handtücher:</strong> Erstausstattung bei Anreise bezugsfertig inklusive. Küchenrolle, Spülmaschinentabs und Starter-Kaffee ebenfalls vorhanden.
+            <strong>Bettwäsche & Handtücher:</strong> Erstausstattung bei Anreise bezugsfertig inklusive. Küchenrolle, Toilettenpapier und Spülmaschinentabs ebenfalls vorhanden.
           </span>
         </div>
       </div>

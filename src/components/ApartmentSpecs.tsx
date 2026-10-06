@@ -22,7 +22,7 @@ export function ApartmentSpecs({ apartment }: ApartmentSpecsProps) {
                 <span>Feldrandlage</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-stone-900 mb-4">
-                Ihr Feriendomizil im Zentrum aller Ostseestrände
+                Ihre Ferienwohnung im Zentrum der Ostseestrände
               </h2>
               <p className="text-stone-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">
                 {apartment.fullStory}
@@ -97,9 +97,6 @@ export function ApartmentSpecs({ apartment }: ApartmentSpecsProps) {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-stone-900">Haustiere:</span> Allergikerfreundlich (keine Haustiere)
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-stone-900">Ruhezeiten:</span> {apartment.rules.quietHours}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-stone-900">Parken:</span> 1 fester Stellplatz kostenfrei
