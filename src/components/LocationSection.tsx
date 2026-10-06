@@ -7,12 +7,12 @@ interface LocationSectionProps {
 
 export function LocationSection({ apartment }: LocationSectionProps) {
   const distances = [
-    { title: 'Ostseestrand & Promenade', dist: '150 Meter', time: '2 Min. zu Fuß', icon: <Waves className="w-4 h-4 text-sky-600" /> },
-    { title: 'Bäcker & Frühstückscafé', dist: '200 Meter', time: '3 Min. zu Fuß', icon: <Coffee className="w-4 h-4 text-amber-700" /> },
-    { title: 'Seebrücke Zingst & Tauchgondel', dist: '650 Meter', time: '8 Min. zu Fuß', icon: <Compass className="w-4 h-4 text-indigo-600" /> },
-    { title: 'Supermarkt (Edeka / Aldi)', dist: '850 Meter', time: '2 Min. per Rad', icon: <ShoppingBag className="w-4 h-4 text-emerald-600" /> },
-    { title: 'Zingster Hafen (Bodden)', dist: '1,4 Kilometer', time: '5 Min. per Rad', icon: <Navigation className="w-4 h-4 text-rose-600" /> },
-    { title: 'Bahnhof Barth (nächster Fernzug)', dist: '14 Kilometer', time: '18 Min. mit PKW/Bus', icon: <Train className="w-4 h-4 text-purple-600" /> }
+    { title: 'Weissenhäuser Strand (Ostsee)', dist: '6 Kilometer', time: '7 Min. mit PKW', icon: <Waves className="w-4 h-4 text-sky-600" /> },
+    { title: 'Heiligenhafen (Seebrücke & Yachthafen)', dist: '12 Kilometer', time: '10 Min. mit PKW', icon: <Navigation className="w-4 h-4 text-indigo-600" /> },
+    { title: 'Sonneninsel Fehmarn (Ostsee)', dist: '20 Kilometer', time: '18 Min. mit PKW', icon: <Compass className="w-4 h-4 text-amber-700" /> },
+    { title: 'Oldenburger Wallmuseum', dist: '1,8 Kilometer', time: '4 Min. mit PKW', icon: <ShoppingBag className="w-4 h-4 text-emerald-600" /> },
+    { title: 'Rathaus & historischer Stadtkern', dist: '1,1 Kilometer', time: '13 Min. zu Fuß', icon: <Coffee className="w-4 h-4 text-amber-800" /> },
+    { title: 'Grömitz & Hohwachter Bucht', dist: '22 Kilometer', time: '20 Min. mit PKW', icon: <Train className="w-4 h-4 text-purple-600" /> }
   ];
 
   return (
@@ -24,10 +24,10 @@ export function LocationSection({ apartment }: LocationSectionProps) {
             Lage & Umgebung
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-stone-900">
-            Perfekte Strandlage im Ostseeheilbad Zingst
+            Im Herzen der Halbinsel Wagrien & OstseeSpitze
           </h2>
           <p className="text-stone-600 mt-2 text-base">
-            Ruhig gelegen in einer verkehrsberuhigten Sackgasse, und dennoch in nur wenigen Schritten am feinen Sandstrand und an der Flaniermeile.
+            Ruhige Feldrandlage in Oldenburg in Holstein: Die perfekte Ausgangslage, um jeden Tag flexibel den schönsten Ostseestrand nach Wind- und Sonnenbedingungen zu wählen.
           </p>
         </div>
 

@@ -109,9 +109,9 @@ export function buildMailtoInquiry(params: {
 }): string {
   const subject = encodeURIComponent(`Buchungsanfrage: ${params.apartmentName} (${params.checkIn} bis ${params.checkOut})`);
   
-  const bodyText = `Guten Tag Familie Meyer,
+  const bodyText = `Guten Tag Familie Harms,
 
-ich interessiere mich für Ihre Ferienwohnung "${params.apartmentName}" und möchte gerne für folgenden Zeitraum anfragen:
+ich interessiere mich für Ihre Ferienwohnung "${params.apartmentName}" in Oldenburg in Holstein und möchte gerne für folgenden Zeitraum anfragen:
 
 - Zeitraum: ${params.checkIn} bis ${params.checkOut} (${params.nights} Nächte)
 - Gäste: ${params.guestsAdults} Erwachsene${params.guestsChildren > 0 ? `, ${params.guestsChildren} Kinder` : ''}

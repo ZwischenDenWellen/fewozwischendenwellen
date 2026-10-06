@@ -438,12 +438,12 @@ export function CalendarSection({
                   <span>Ihre Auswahl</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-rose-100 border border-rose-300" />
-                  <span>Airbnb</span>
+                  <span className="w-3.5 h-3.5 rounded bg-blue-100 border border-blue-400" />
+                  <span>FeWo-direkt</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-sky-100 border border-sky-300" />
-                  <span>Booking.com</span>
+                  <span className="w-3.5 h-3.5 rounded bg-rose-100 border border-rose-300" />
+                  <span>Airbnb</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-3.5 h-3.5 rounded bg-stone-300" />
@@ -534,7 +534,7 @@ export function CalendarSection({
                 </div>
 
                 <div className="flex justify-between">
-                  <span>Kurabgabe Zingst ({adultsCount} Erw. × {priceCalc.nights} N.)</span>
+                  <span>Kurbeitrag {apartment.city} ({adultsCount} Erw. × {priceCalc.nights} N.)</span>
                   <span className="font-medium text-stone-900">{priceCalc.touristTaxTotal.toFixed(2)} €</span>
                 </div>
 

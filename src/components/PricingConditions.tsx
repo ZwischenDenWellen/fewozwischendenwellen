@@ -60,12 +60,12 @@ export function PricingConditions({ apartment, onScrollToCalendar }: PricingCond
               <span className="text-stone-600 text-xs"> / Nacht</span>
             </div>
             <p className="text-xs text-stone-700 leading-relaxed">
-              Gültig von Juni bis September sowie zu Ostern, Weihnachten & Silvester. Traumhafte Bade- und Sommerzeit an der Ostsee.
+              Gültig von Juni bis September sowie zu Ostern, Weihnachten & Silvester. Traumhafter Sommer am Waginger See und in den Bergen.
             </p>
             <div className="pt-2 text-xs text-stone-800 space-y-1.5">
               <div className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Mindestaufenthalt: 5 Nächte im Sommer</span>
+                <span>Mindestaufenthalt: 4 Nächte</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-emerald-700" />
@@ -83,7 +83,7 @@ export function PricingConditions({ apartment, onScrollToCalendar }: PricingCond
                 <span className="font-bold text-stone-900">{pricing.cleaningFee} €</span>
               </div>
               <div className="flex justify-between pb-2 border-b border-stone-200">
-                <span className="text-stone-700">Kurabgabe Zingst (Erw./Tag):</span>
+                <span className="text-stone-700">Kurbeitrag {apartment.city} (Erw./Tag):</span>
                 <span className="font-bold text-stone-900">{pricing.touristTaxPerAdultPerNight.toFixed(2)} €</span>
               </div>
               <div className="flex justify-between pb-2 border-b border-stone-200">

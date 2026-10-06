@@ -14,10 +14,17 @@ export function ApartmentSpecs({ apartment }: ApartmentSpecsProps) {
           {/* Main 2-column description */}
           <div className="lg:col-span-2 space-y-8">
             <div>
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                <span>2025 frisch saniert</span>
+                <span>·</span>
+                <span>76 m² Ferienwohnung</span>
+                <span>·</span>
+                <span>Feldrandlage</span>
+              </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-stone-900 mb-4">
-                Ihr Feriendomizil im Ostseeheilbad Zingst
+                Ihr Feriendomizil im Zentrum aller Ostseestrände
               </h2>
-              <p className="text-stone-700 text-base sm:text-lg leading-relaxed">
+              <p className="text-stone-700 text-base sm:text-lg leading-relaxed whitespace-pre-line">
                 {apartment.fullStory}
               </p>
             </div>
@@ -26,47 +33,47 @@ export function ApartmentSpecs({ apartment }: ApartmentSpecsProps) {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-stone-900 flex items-center gap-2">
                 <Home className="w-5 h-5 text-amber-800" />
-                Raumaufteilung & Schlafkomfort
+                Raumaufteilung & 76 m² Wohlfühlkomfort
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl bg-stone-100/70 border border-stone-200">
                   <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1">
                     <BedDouble className="w-4 h-4 text-amber-800" />
-                    Hauptschlafzimmer (Eltern)
+                    1. Schlafzimmer (Doppelbett)
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    Großes Hotel-Boxspringbett (180 × 200 cm), rückenfreundliche 7-Zonen-Taschenfederkernmatratzen, Verdunklungsgardinen und geräumiger Kleiderschrank mit Safe.
+                    Gemütliches Schlafzimmer mit Doppelbett, Nachttisch, Lampe, Kleiderschrank und Fenster mit Blick in den ruhigen Garten.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-stone-100/70 border border-stone-200">
                   <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1">
                     <BedDouble className="w-4 h-4 text-amber-800" />
-                    2. Schlafzimmer (Kinder / Gäste)
+                    2. Schlafzimmer (2 Einzelbetten)
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    Zwei bequeme Einzelbetten (je 90 × 200 cm), Leselampen mit integrierten USB-Ladebuchsen sowie eigener Schrankbereich.
+                    Zweites Schlafzimmer mit zwei bequemen Einzelbetten, Holzschrank und gemütlicher Sitzecke – ideal für Kinder oder Freunde.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-stone-100/70 border border-stone-200">
                   <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1">
                     <Bath className="w-4 h-4 text-amber-800" />
-                    Tageslicht-Badezimmer
+                    Badezimmer mit zwei Waschbecken
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    Bodengleiche Walk-In Regendusche, Handtuchwärmer, Kosmetikspiegel, Marken-Haartrockner und Fußbodenheizung.
+                    Modernes, helles Badezimmer mit Duschkabine, WC, großem Spiegel und zwei Waschbecken – kein Gedränge am Morgen!
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-stone-100/70 border border-stone-200">
                   <div className="flex items-center gap-2 text-stone-900 font-semibold text-sm mb-1">
                     <Compass className="w-4 h-4 text-amber-800" />
-                    Wohnbereich & Südbalkon
+                    Wohn-Essbereich & separate Küche
                   </div>
                   <p className="text-xs text-stone-600 leading-relaxed">
-                    Sonniger Essbereich für 4 Personen, bequeme Couchgarnitur, 55" 4K Smart-TV und direkter Zugang zum möblierten Balkon.
+                    Wohnbereich mit bequemem Sofa, Sessel, Flachbild-TV, Esstisch und voll ausgestatteter Küche mit Geschirrspüler, Herd & Backofen.
                   </p>
                 </div>
               </div>

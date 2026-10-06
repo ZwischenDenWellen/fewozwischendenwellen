@@ -1,40 +1,40 @@
 import { ApartmentInfo, ICalFeed, ManualBlock } from '../types';
 
 export const DEFAULT_APARTMENT: ApartmentInfo = {
-  name: "Ferienwohnung Meerblick & Dünenzauber",
-  tagline: "Lichtdurchflutete 3-Zimmer-Designwohnung nur 150m vom Ostseestrand",
-  description: "Erleben Sie erholsame Tage in unserer liebevoll modernisierten 68 m² Ferienwohnung. Mit großem Südbalkon, sonnigem Wohnbereich, zwei separaten Schlafzimmern und vollwertiger Markenküche bietet die Wohnung den idealen Rückzugsort für bis zu 4 Gäste. Nur 2 Gehminuten zum feinsandigen Strand.",
-  fullStory: "Unsere Ferienwohnung wurde im Frühjahr 2024 umfassend renoviert und mit viel Liebe zum Detail im nordisch-skandinavischen Stil eingerichtet. Große Fensterfronten lassen viel Licht herein, und vom sonnigen Südbalkon genießen Sie bei frischer Meeresbrise Ihren Morgenkaffee oder den Sundowner. Für Homeoffice-Reisende steht stabiles Glasfaser-WLAN mit 250 Mbit/s zur Verfügung. Zur Wohnung gehört ein privater PKW-Stellplatz direkt vor dem Haus sowie ein abschließbarer Fahrradschuppen mit Lademöglichkeit für E-Bikes.",
-  address: "Strandstraße 24, Whg. 12",
-  postalCode: "18374",
-  city: "Zingst",
-  region: "Fischland-Darß-Zingst, Mecklenburg-Vorpommern",
+  name: "Renovierte 3-Zimmer Ferienwohnung im Zentrum der Strände",
+  tagline: "76 m² im cleanen maritimen Stil saniert – Zentral an der OstseeSpitze (Oldenburg i. H.)",
+  description: "Der Erholungsort Oldenburg in Holstein zählt zu den ältesten Städten in Schleswig-Holstein und liegt im Zentrum der Tourismusregion „OstseeSpitze“ mit bekannten Ostseebädern wie Heiligenhafen und Weißenhäuser Strand, direkt vor der Sonneninsel Fehmarn. Die 2025 frisch sanierte 76 m² Ferienwohnung bietet 2 separate Schlafzimmer mit 4 Betten, einen sonnigen Wohn-Essbereich, eine voll ausgestattete Küche sowie ein modernes Bad mit Dusche und Doppelwaschtisch.",
+  fullStory: "Die zentrale Lage macht die Ferienwohnung zum idealen Ausgangsort für Strandbesuche oder die vielen touristischen Angebote in der Region: Machen Sie einen Tagesausflug nach Fehmarn, betrachten Sie den Sonnenuntergang in Heiligenhafen, besuchen Sie das Neustädter Brauhaus Klüvers auf ein Bier oder machen Sie einfach einen entspannten Spieleabend mit der Familie direkt in der Ferienwohnung. Durch die Lage auf der Halbinsel „Wagrien“ können Sie Ihre Strandbesuche immer den aktuellen Wind- und Tagesbedingungen anpassen. Auch bei „Schietwetter“ bietet die Region viele Aktivitäten im Trockenen (wie das Abenteuer Dschungelland oder die Ostsee Erlebniswelt).\n\nDie Gastgeber, eine junge Familie, sind in der Region aufgewachsen und stehen Ihnen jederzeit mit persönlichen Geheimtipps zur Seite. Die Ferienwohnung mit 76 m² liegt in einem ruhigen Wohngebiet im Obergeschoss eines Einfamilienhauses mit Feldrandlage. Kostenfreie Parkmöglichkeiten sind direkt an der Straße immer vorhanden.",
+  address: "Im Zentrum der Strände",
+  postalCode: "23758",
+  city: "Oldenburg in Holstein",
+  region: "Halbinsel Wagrien / OstseeSpitze, Schleswig-Holstein",
   country: "Deutschland",
   coordinates: {
-    lat: 54.4348,
-    lng: 12.6845
+    lat: 54.2933,
+    lng: 10.8872
   },
-  sizeSqm: 68,
+  sizeSqm: 76,
   maxGuests: 4,
   bedrooms: 2,
-  beds: 3, // 1 Boxspringbett (180x200) + 2 Einzelbetten (90x200)
-  bathrooms: 1,
-  floor: "2. Obergeschoss (mit Fahrstuhl)",
+  beds: 4, // 1 Doppelbett + 2 Einzelbetten (4 Betten)
+  bathrooms: 1, // Bad mit Dusche, WC & zwei Waschbecken
+  floor: "Obergeschoss (Einfamilienhaus in Feldrandlage)",
   pricing: {
-    basePricePerNight: 95,          // Nebensaison
-    highSeasonPricePerNight: 145,   // Hauptsaison (Juni - Sep & Weihnachten/Silvester)
-    cleaningFee: 75,                // Einmalige Endreinigung
-    touristTaxPerAdultPerNight: 2.80,// Zingster Kurabgabe
+    basePricePerNight: 89,          // Nebensaison
+    highSeasonPricePerNight: 129,   // Hauptsaison (Sommer / Feiertage)
+    cleaningFee: 65,                // Einmalige Endreinigung
+    touristTaxPerAdultPerNight: 2.00,// Ostseecard / Kurabgabe
     deposit: 150,                   // Kaution
-    minimumStayNights: 3,
-    discountWeekPercent: 5          // 5% ab 7 Nächten
+    minimumStayNights: 3,           // Mindestaufenthalt
+    discountWeekPercent: 5          // 5% Rabatt ab 7 Nächten
   },
   host: {
-    name: "Alexander & Sabine Meyer",
+    name: "Familie Harms",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
     phone: "+49 (0) 171 4589230",
-    email: "ferienwohnung.zingst.strand@gmail.com",
-    bio: "Wir sind seit über 15 Jahren begeisterte Ostsee-Liebhaber und möchten, dass Sie sich in unserer Wohnung wie zu Hause fühlen. Bei Fragen zur Wohnung oder für Ausflugstipps stehen wir Ihnen jederzeit gerne zur Seite!",
+    email: "alex.harms93.AH@gmail.com",
+    bio: "Wir sind eine junge Familie, die hier an der Ostsee aufgewachsen ist und die Region liebt. Wir haben die Ferienwohnung Anfang 2025 frisch renoviert und möchten Ihnen einen perfekten Ausgangspunkt für alle Ostseestrände von Fehmarn bis Grömitz bieten!",
     responseTime: "Antwortet meist innerhalb einer Stunde",
     languages: ["Deutsch", "Englisch"],
     isSuperhost: true
@@ -50,65 +50,75 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   photos: [
     {
       id: "p1",
-      url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
+      url: "https://media.vrbo.com/lodging/116000000/115500000/115499500/115499475/9d178653.jpg?impolicy=resizecrop&rw=1200&ra=fit",
       title: "Heller Wohn- und Essbereich",
-      caption: "Offener, lichtdurchfluteter Wohnraum mit gemütlicher Sitzecke und Smart-TV",
+      caption: "Frisch saniert im cleanen, gemütlichen maritimen Stil mit Couch, Sessel und Esstisch",
       category: "Wohnbereich"
     },
     {
       id: "p2",
-      url: "https://images.unsplash.com/photo-1540518614846-7ede433c4ef4?auto=format&fit=crop&w=1000&q=80",
-      title: "Hauptschlafzimmer mit Boxspringbett",
-      caption: "Hochwertiges Boxspringbett (180x200 cm), rückenfreundliche Matratzen und Verdunklungsvorhänge",
-      category: "Schlafzimmer"
+      url: "https://media.vrbo.com/lodging/116000000/115500000/115499500/115499475/79330a55.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+      title: "Wohnbereich mit Smart-TV",
+      caption: "Bequeme Sitzecke mit modernem Flachbild-TV, WLAN und Blick ins Grüne",
+      category: "Wohnbereich"
     },
     {
       id: "p3",
-      url: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=80",
-      title: "Voll ausgestattete Küche",
-      caption: "Geschirrspüler, Nespresso-Maschine, Induktionsherd, Backofen und Mikrowelle",
-      category: "Küche"
+      url: "https://media.vrbo.com/lodging/116000000/115500000/115499500/115499475/9bbeeb49.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+      title: "1. Schlafzimmer mit Doppelbett",
+      caption: "Ruhiges Hauptschlafzimmer mit Doppelbett, Nachttisch, Lampe und Kleiderschrank",
+      category: "Schlafzimmer"
     },
     {
       id: "p4",
-      url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80",
-      title: "Modernes Wellness-Badezimmer",
-      caption: "Ebenerdige Regendusche, Handtuchwärmer, Föhn und beleuchteter Spiegel",
-      category: "Bad"
+      url: "https://media.vrbo.com/lodging/116000000/115500000/115499500/115499475/2af367b9.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+      title: "2. Schlafzimmer mit Einzelbetten",
+      caption: "Zweites Schlafzimmer mit gemütlichen Einzelbetten – ideal für Kinder oder Mitreisende",
+      category: "Schlafzimmer"
     },
     {
       id: "p5",
-      url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80",
-      title: "Sonniger Südbalkon",
-      caption: "Gemütliche Loungemöbel und Sonnenschirm für entspannte Nachmittage",
-      category: "Balkon/Aussicht"
+      url: "https://media.vrbo.com/lodging/116000000/115500000/115499500/115499475/25cd3ab4.jpg?impolicy=resizecrop&rw=1200&ra=fit",
+      title: "Modernes Badezimmer mit Doppelwaschtisch",
+      caption: "Neu saniertes Bad mit moderner Duschkabine, WC und zwei Waschbecken",
+      category: "Bad"
     },
     {
       id: "p6",
-      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
-      title: "Nur 150m zum Ostseestrand",
-      caption: "Feinsandiger Sandstrand mit Strandkörben und Seebrücke in unmittelbarer Nähe",
+      url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      title: "Strände der OstseeSpitze ganz nah",
+      caption: "Nur wenige Fahrminuten zum Weissenhäuser Strand, Heiligenhafen und Fehmarn",
       category: "Umgebung"
     }
   ],
   amenities: [
-    { id: "a1", name: "Highspeed WLAN (250 Mbit/s)", category: "Wohnen & Technik", icon: "Wifi", highlight: true },
-    { id: "a2", name: "Smart-TV (55 Zoll, Netflix fähig)", category: "Wohnen & Technik", icon: "Tv", highlight: true },
-    { id: "a3", name: "Südbalkon mit Loungemöbeln", category: "Außenbereich", icon: "Sun", highlight: true },
-    { id: "a4", name: "Kostenloser PKW-Stellplatz", category: "Außenbereich", icon: "Car", highlight: true },
-    { id: "a5", name: "Geschirrspüler & Backofen", category: "Küche & Essen", icon: "Utensils", highlight: true },
-    { id: "a6", name: "Nespresso & Filterkaffeemaschine", category: "Küche & Essen", icon: "Coffee" },
-    { id: "a7", name: "Ebenerdige Regendusche", category: "Schlafen & Bad", icon: "Droplets", highlight: true },
-    { id: "a8", name: "Waschmaschine & Trockner im Haus", category: "Extras", icon: "Shirt" },
-    { id: "a9", name: "E-Bike Ladestation im Schuppen", category: "Außenbereich", icon: "Zap" },
-    { id: "a10", name: "Hochstuhl & Babyreisebett", category: "Familie & Sicherheit", icon: "Baby" },
-    { id: "a11", name: "Rauchmelder & Erste-Hilfe-Set", category: "Familie & Sicherheit", icon: "ShieldCheck" },
-    { id: "a12", name: "Aufzug / Fahrstuhl barrierearm", category: "Extras", icon: "Building" }
+    { id: "a1", name: "Highspeed WLAN (kostenlos)", category: "Wohnen & Technik", icon: "Wifi", highlight: true },
+    { id: "a2", name: "Smart-TV & Kabel-/Satellitenfernsehen", category: "Wohnen & Technik", icon: "Tv", highlight: true },
+    { id: "a3", name: "Küche mit Geschirrspüler, Herd & Backofen", category: "Küche & Essen", icon: "Utensils", highlight: true },
+    { id: "a4", name: "Kaffee-/Teezubehör, Wasserkocher & Toaster", category: "Küche & Essen", icon: "Coffee" },
+    { id: "a5", name: "Bad mit Dusche, WC & 2 Waschbecken", category: "Schlafen & Bad", icon: "Droplets", highlight: true },
+    { id: "a6", name: "2 Schlafzimmer mit 4 Betten", category: "Schlafen & Bad", icon: "BedDouble", highlight: true },
+    { id: "a7", name: "Ruhige Feldrandlage im Obergeschoss", category: "Außenbereich", icon: "Sun", highlight: true },
+    { id: "a8", name: "Kostenfreie Parkplätze direkt an der Straße", category: "Außenbereich", icon: "Car", highlight: true },
+    { id: "a9", name: "Zentrale Lage im Zentrum aller Ostseestrände", category: "Extras", icon: "Compass", highlight: true },
+    { id: "a10", name: "Familienfreundlich (Spiele & Platz)", category: "Familie & Sicherheit", icon: "Baby" },
+    { id: "a11", name: "Rauchmelder & Heizung", category: "Familie & Sicherheit", icon: "ShieldCheck" },
+    { id: "a12", name: "Nichtraucherdomizil (2025 saniert)", category: "Extras", icon: "Sparkles", highlight: true }
   ]
 };
 
-// Default demonstration iCal feeds (e.g. Airbnb, Booking.com)
+// Default demonstration iCal feeds (FeWo-direkt / Vrbo, Airbnb)
 export const DEFAULT_ICAL_FEEDS: ICalFeed[] = [
+  {
+    id: "feed-fewo",
+    name: "FeWo-direkt (p5616861)",
+    url: "https://www.fewo-direkt.de/icalendar/5616861.ics",
+    color: "#003580", // FeWo-direkt blue
+    enabled: true,
+    lastSyncedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+    eventCount: 2,
+    status: "ok"
+  },
   {
     id: "feed-airbnb",
     name: "Airbnb Belegung",
@@ -116,16 +126,6 @@ export const DEFAULT_ICAL_FEEDS: ICalFeed[] = [
     color: "#FF385C", // Airbnb red
     enabled: true,
     lastSyncedAt: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
-    eventCount: 3,
-    status: "ok"
-  },
-  {
-    id: "feed-booking",
-    name: "Booking.com Belegung",
-    url: "https://admin.booking.com/hotel/hoteladmin/ical.html?t=sample-token",
-    color: "#003580", // Booking navy
-    enabled: true,
-    lastSyncedAt: new Date(Date.now() - 1000 * 60 * 42).toISOString(),
     eventCount: 2,
     status: "ok"
   }
@@ -149,39 +149,30 @@ const today = new Date();
 
 export const INITIAL_DEMO_EVENTS = [
   {
-    uid: "airbnb-res-101@airbnb.com",
-    feedId: "feed-airbnb",
-    feedName: "Airbnb",
-    summary: "Airbnb Belegung (Familie Weber)",
+    uid: "fewo-res-5616861-1@fewo-direkt.de",
+    feedId: "feed-fewo",
+    feedName: "FeWo-direkt",
+    summary: "FeWo-direkt Buchung",
     startDate: formatISODate(addDays(today, 2)),
     endDate: formatISODate(addDays(today, 6)),
-    color: "#FF385C"
-  },
-  {
-    uid: "booking-res-202@booking.com",
-    feedId: "feed-booking",
-    feedName: "Booking.com",
-    summary: "Booking.com Belegung (Dr. Franke)",
-    startDate: formatISODate(addDays(today, 9)),
-    endDate: formatISODate(addDays(today, 14)),
     color: "#003580"
   },
   {
-    uid: "airbnb-res-303@airbnb.com",
+    uid: "airbnb-res-101@airbnb.com",
     feedId: "feed-airbnb",
     feedName: "Airbnb",
-    summary: "Airbnb Belegung (M. Sommer)",
-    startDate: formatISODate(addDays(today, 18)),
-    endDate: formatISODate(addDays(today, 23)),
+    summary: "Airbnb Belegung",
+    startDate: formatISODate(addDays(today, 10)),
+    endDate: formatISODate(addDays(today, 15)),
     color: "#FF385C"
   },
   {
-    uid: "booking-res-404@booking.com",
-    feedId: "feed-booking",
-    feedName: "Booking.com",
-    summary: "Booking.com Belegung (T. Hoffmann)",
-    startDate: formatISODate(addDays(today, 27)),
-    endDate: formatISODate(addDays(today, 32)),
+    uid: "fewo-res-5616861-2@fewo-direkt.de",
+    feedId: "feed-fewo",
+    feedName: "FeWo-direkt",
+    summary: "FeWo-direkt Buchung",
+    startDate: formatISODate(addDays(today, 20)),
+    endDate: formatISODate(addDays(today, 25)),
     color: "#003580"
   }
 ];
@@ -189,9 +180,9 @@ export const INITIAL_DEMO_EVENTS = [
 export const INITIAL_MANUAL_BLOCKS: ManualBlock[] = [
   {
     id: "block-1",
-    startDate: formatISODate(addDays(today, 38)),
-    endDate: formatISODate(addDays(today, 42)),
-    reason: "Eigentümer-Eigenbedarf (Familienurlaub)",
+    startDate: formatISODate(addDays(today, 32)),
+    endDate: formatISODate(addDays(today, 36)),
+    reason: "Eigentümer-Eigenbedarf",
     createdAt: new Date().toISOString()
   }
 ];

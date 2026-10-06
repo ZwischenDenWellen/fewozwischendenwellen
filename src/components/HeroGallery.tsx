@@ -120,17 +120,17 @@ export function HeroGallery({ apartment, onOpenLightbox, onScrollToCalendar }: H
           </div>
           <div>
             <div className="text-xs text-stone-500 font-medium">Kapazität</div>
-            <div className="text-sm font-semibold text-stone-900">Bis zu {apartment.maxGuests} Personen</div>
+            <div className="text-sm font-semibold text-stone-900">4 Betten (2 Schlafzimmer)</div>
           </div>
         </div>
 
         <div className="p-4 rounded-xl bg-white border border-stone-200/90 shadow-xs flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center font-bold text-sm shrink-0">
-            150m
+            2025
           </div>
           <div>
-            <div className="text-xs text-stone-500 font-medium">Strandnähe</div>
-            <div className="text-sm font-semibold text-stone-900">Nur 2 Gehminuten</div>
+            <div className="text-xs text-stone-500 font-medium">Frisch saniert</div>
+            <div className="text-sm font-semibold text-stone-900">Maritimer Wohlfühlstil</div>
           </div>
         </div>
 
@@ -139,8 +139,8 @@ export function HeroGallery({ apartment, onOpenLightbox, onScrollToCalendar }: H
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs text-stone-500 font-medium">Inklusive</div>
-            <div className="text-sm font-semibold text-stone-900">PKW & WLAN 250 Mbit</div>
+            <div className="text-xs text-stone-500 font-medium">Feldrandlage</div>
+            <div className="text-sm font-semibold text-stone-900">Kostenfreie Parkplätze</div>
           </div>
         </div>
       </div>

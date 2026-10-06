@@ -103,7 +103,7 @@ export function HostProfile({ apartment, onScrollToCalendar }: HostProfileProps)
 
                 {/* WhatsApp */}
                 <a
-                  href={`https://wa.me/${host.phone.replace(/[^0-9]/g, '')}?text=Hallo%20Familie%20Meyer%2C%20ich%20habe%20eine%20Frage%20zur%20Ferienwohnung`}
+                  href={`https://wa.me/${host.phone.replace(/[^0-9]/g, '')}?text=Hallo%20Familie%20Harms%2C%20ich%20habe%20eine%20Frage%20zur%20Ferienwohnung`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-3.5 rounded-xl bg-stone-700/60 hover:bg-stone-700 text-white transition-colors border border-stone-600/60 text-xs group"
