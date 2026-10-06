@@ -44,12 +44,13 @@ export function ICalSyncDrawer({
   onImportIcsFile,
   onAddManualBlock,
   onRemoveManualBlock,
-  onDownloadICal,
-  getExportICalContent,
   onUpdateApartment,
   onResetDefaults
-}: ICalSyncDrawerProps) {
-  const [activeTab, setActiveTab] = useState<'feeds' | 'export' | 'blocks' | 'settings' | 'inquiries'>('feeds');
+}: Omit<ICalSyncDrawerProps, 'onDownloadICal' | 'getExportICalContent'> & {
+  onDownloadICal?: () => void;
+  getExportICalContent?: () => string;
+}) {
+  const [activeTab, setActiveTab] = useState<'feeds' | 'blocks' | 'settings' | 'inquiries'>('feeds');
 
   // New Feed form
   const [newFeedName, setNewFeedName] = useState('');
@@ -167,19 +168,7 @@ export function ICalSyncDrawer({
             }`}
           >
             <CalendarSync className="w-3.5 h-3.5" />
-            <span>iCal Feeds ({feeds.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('export')}
-            className={`py-3 px-3 border-b-2 flex items-center gap-1.5 whitespace-nowrap transition-colors ${
-              activeTab === 'export'
-                ? 'border-amber-800 text-amber-900 font-bold bg-white'
-                : 'border-transparent text-stone-600 hover:text-stone-900'
-            }`}
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>iCal Export</span>
+            <span>Holidu-Kalender ({feeds.length})</span>
           </button>
 
           <button

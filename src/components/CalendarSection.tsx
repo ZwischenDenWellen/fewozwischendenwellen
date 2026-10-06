@@ -287,47 +287,39 @@ export function CalendarSection({
           </div>
 
           {/* Sync actions toolbar */}
+          {/* Calendar Actions */}
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={onSyncAllFeeds}
               disabled={isSyncingAll}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-white border border-stone-300 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors shadow-2xs disabled:opacity-60"
-              title="Alle externen iCal-Feeds (Airbnb, Booking) abrufen"
+              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-sky-50 border border-sky-200 text-sky-900 hover:bg-sky-100 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
+              title="Aktuelle Belegungen von Holidu abrufen"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-amber-700' : 'text-stone-500'}`} />
-              <span>{isSyncingAll ? 'Synchronisiere...' : 'iCal Sync prüfen'}</span>
-            </button>
-
-            <button
-              onClick={onDownloadICal}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-white border border-stone-300 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors shadow-2xs"
-              title="Belegungskalender als .ics Datei exportieren"
-            >
-              <Download className="w-3.5 h-3.5 text-stone-500" />
-              <span>iCal Export (.ics)</span>
+              <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-sky-700' : 'text-sky-600'}`} />
+              <span>{isSyncingAll ? 'Aktualisiere...' : 'Mit Holidu abgleichen'}</span>
             </button>
 
             <button
               onClick={onOpenHostSettings}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-stone-800 text-white hover:bg-stone-900 transition-colors shadow-2xs"
-              title="Vermieter-Einstellungen & Feeds verwalten"
+              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-stone-800 text-white hover:bg-stone-900 transition-colors shadow-2xs cursor-pointer"
+              title="Vermieter-Einstellungen & Kalendersync einsehen"
             >
               <Settings className="w-3.5 h-3.5 text-amber-300" />
-              <span>Feeds verwalten</span>
+              <span>Vermieter-Bereich</span>
             </button>
           </div>
         </div>
 
         {/* Sync message banner if any */}
         {syncStatusMessage && (
-          <div className="mb-6 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-between">
+          <div className="mb-6 p-3 rounded-xl bg-sky-50 border border-sky-200 text-xs text-sky-900 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-sky-600 shrink-0" />
               <span>{syncStatusMessage}</span>
             </div>
             <button
               onClick={() => onSyncAllFeeds()}
-              className="text-amber-800 font-semibold underline text-2xs"
+              className="text-sky-800 font-semibold underline text-2xs cursor-pointer"
             >
               Erneut abgleichen
             </button>
@@ -438,12 +430,8 @@ export function CalendarSection({
                   <span>Ihre Auswahl</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-blue-100 border border-blue-400" />
-                  <span>FeWo-direkt</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-rose-100 border border-rose-300" />
-                  <span>Airbnb</span>
+                  <span className="w-3.5 h-3.5 rounded bg-sky-100 border border-sky-400" />
+                  <span>Belegt (Holidu / Portale)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-3.5 h-3.5 rounded bg-stone-300" />

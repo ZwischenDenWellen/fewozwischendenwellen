@@ -1,14 +1,17 @@
 import { ApartmentInfo, ICalFeed, ManualBlock } from '../types';
+import { INITIAL_HOLIDU_EVENTS } from './holiduEvents';
+
+export const HOLIDU_ICAL_URL = "https://api.host.holidu.com/ical/e1tcvw2oaxy-z5ob-vevl.ics";
 
 export const DEFAULT_APARTMENT: ApartmentInfo = {
-  name: "Renovierte 3-Zimmer Ferienwohnung im Zentrum der Strände",
+  name: "3-Zimmer Ferienwohnung im Zentrum der Strände",
   tagline: "76 m² im cleanen maritimen Stil saniert – Zentral an der OstseeSpitze (Oldenburg i. H.)",
   description: "Der Erholungsort Oldenburg in Holstein zählt zu den ältesten Städten in Schleswig-Holstein und liegt im Zentrum der Tourismusregion „OstseeSpitze“ mit bekannten Ostseebädern wie Heiligenhafen und Weißenhäuser Strand, direkt vor der Sonneninsel Fehmarn. Die 2025 frisch sanierte 76 m² Ferienwohnung bietet 2 separate Schlafzimmer mit 4 Betten, einen sonnigen Wohn-Essbereich, eine voll ausgestattete Küche sowie ein modernes Bad mit Dusche und Doppelwaschtisch.",
   fullStory: "Die zentrale Lage macht die Ferienwohnung zum idealen Ausgangsort für Strandbesuche oder die vielen touristischen Angebote in der Region: Machen Sie einen Tagesausflug nach Fehmarn, betrachten Sie den Sonnenuntergang in Heiligenhafen, besuchen Sie das Neustädter Brauhaus Klüvers auf ein Bier oder machen Sie einfach einen entspannten Spieleabend mit der Familie direkt in der Ferienwohnung. Durch die Lage auf der Halbinsel „Wagrien“ können Sie Ihre Strandbesuche immer den aktuellen Wind- und Tagesbedingungen anpassen. Auch bei „Schietwetter“ bietet die Region viele Aktivitäten im Trockenen (wie das Abenteuer Dschungelland oder die Ostsee Erlebniswelt).\n\nDie Gastgeber, eine junge Familie, sind in der Region aufgewachsen und stehen Ihnen jederzeit mit persönlichen Geheimtipps zur Seite. Die Ferienwohnung mit 76 m² liegt in einem ruhigen Wohngebiet im Obergeschoss eines Einfamilienhauses mit Feldrandlage. Kostenfreie Parkmöglichkeiten sind direkt an der Straße immer vorhanden.",
-  address: "Im Zentrum der Strände",
+  address: "Lindenallee 62",
   postalCode: "23758",
   city: "Oldenburg in Holstein",
-  region: "Halbinsel Wagrien / OstseeSpitze, Schleswig-Holstein",
+  region: "Ostholstein, Schleswig-Holstein",
   country: "Deutschland",
   coordinates: {
     lat: 54.2933,
@@ -40,8 +43,8 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
     isSuperhost: true
   },
   rules: {
-    checkInTime: "ab 15:00 Uhr (Schlüsseltresor / digitaler Check-in)",
-    checkOutTime: "bis 10:00 Uhr",
+    checkInTime: "ab 16:00 Uhr (Türcode/ digitaler Check-in)",
+    checkOutTime: "bis 11:00 Uhr",
     smokingAllowed: false,
     petsAllowed: false,
     partiesAllowed: false,
@@ -93,7 +96,7 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   ],
   amenities: [
     { id: "a1", name: "Highspeed WLAN (kostenlos)", category: "Wohnen & Technik", icon: "Wifi", highlight: true },
-    { id: "a2", name: "Smart-TV & Kabel-/Satellitenfernsehen", category: "Wohnen & Technik", icon: "Tv", highlight: true },
+    { id: "a2", name: "Smart-TV & Satellitenfernsehen", category: "Wohnen & Technik", icon: "Tv", highlight: true },
     { id: "a3", name: "Küche mit Geschirrspüler, Herd & Backofen", category: "Küche & Essen", icon: "Utensils", highlight: true },
     { id: "a4", name: "Kaffee-/Teezubehör, Wasserkocher & Toaster", category: "Küche & Essen", icon: "Coffee" },
     { id: "a5", name: "Bad mit Dusche, WC & 2 Waschbecken", category: "Schlafen & Bad", icon: "Droplets", highlight: true },
@@ -103,86 +106,24 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
     { id: "a9", name: "Zentrale Lage im Zentrum aller Ostseestrände", category: "Extras", icon: "Compass", highlight: true },
     { id: "a10", name: "Familienfreundlich (Spiele & Platz)", category: "Familie & Sicherheit", icon: "Baby" },
     { id: "a11", name: "Rauchmelder & Heizung", category: "Familie & Sicherheit", icon: "ShieldCheck" },
-    { id: "a12", name: "Nichtraucherdomizil (2025 saniert)", category: "Extras", icon: "Sparkles", highlight: true }
+    { id: "a12", name: "Nichtraucherwohnung (2025 saniert)", category: "Extras", icon: "Sparkles", highlight: true }
   ]
 };
 
-// Default demonstration iCal feeds (FeWo-direkt / Vrbo, Airbnb)
+// Central Holidu iCal feed (Channel Manager syncing FeWo-direkt, Airbnb, Booking.com)
 export const DEFAULT_ICAL_FEEDS: ICalFeed[] = [
   {
-    id: "feed-fewo",
-    name: "FeWo-direkt (p5616861)",
-    url: "https://www.fewo-direkt.de/icalendar/5616861.ics",
-    color: "#003580", // FeWo-direkt blue
+    id: "feed-holidu",
+    name: "Holidu Kalendersync",
+    url: HOLIDU_ICAL_URL,
+    color: "#0284c7", // Holidu sky blue
     enabled: true,
-    lastSyncedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-    eventCount: 2,
-    status: "ok"
-  },
-  {
-    id: "feed-airbnb",
-    name: "Airbnb Belegung",
-    url: "https://www.airbnb.de/calendar/ical/sample-listing-id.ics?s=demo-token",
-    color: "#FF385C", // Airbnb red
-    enabled: true,
-    lastSyncedAt: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
-    eventCount: 2,
+    lastSyncedAt: new Date().toISOString(),
+    eventCount: INITIAL_HOLIDU_EVENTS.length,
     status: "ok"
   }
 ];
 
-// Helper to generate dates relative to current date for realistic demonstration
-const formatISODate = (d: Date): string => {
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+export const INITIAL_DEMO_EVENTS = INITIAL_HOLIDU_EVENTS;
 
-const addDays = (d: Date, days: number): Date => {
-  const res = new Date(d);
-  res.setDate(res.getDate() + days);
-  return res;
-};
-
-const today = new Date();
-
-export const INITIAL_DEMO_EVENTS = [
-  {
-    uid: "fewo-res-5616861-1@fewo-direkt.de",
-    feedId: "feed-fewo",
-    feedName: "FeWo-direkt",
-    summary: "FeWo-direkt Buchung",
-    startDate: formatISODate(addDays(today, 2)),
-    endDate: formatISODate(addDays(today, 6)),
-    color: "#003580"
-  },
-  {
-    uid: "airbnb-res-101@airbnb.com",
-    feedId: "feed-airbnb",
-    feedName: "Airbnb",
-    summary: "Airbnb Belegung",
-    startDate: formatISODate(addDays(today, 10)),
-    endDate: formatISODate(addDays(today, 15)),
-    color: "#FF385C"
-  },
-  {
-    uid: "fewo-res-5616861-2@fewo-direkt.de",
-    feedId: "feed-fewo",
-    feedName: "FeWo-direkt",
-    summary: "FeWo-direkt Buchung",
-    startDate: formatISODate(addDays(today, 20)),
-    endDate: formatISODate(addDays(today, 25)),
-    color: "#003580"
-  }
-];
-
-export const INITIAL_MANUAL_BLOCKS: ManualBlock[] = [
-  {
-    id: "block-1",
-    startDate: formatISODate(addDays(today, 32)),
-    endDate: formatISODate(addDays(today, 36)),
-    reason: "Eigentümer-Eigenbedarf",
-    createdAt: new Date().toISOString()
-  }
-];
+export const INITIAL_MANUAL_BLOCKS: ManualBlock[] = [];

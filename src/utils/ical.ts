@@ -143,6 +143,9 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
     throw new Error('Keine URL angegeben.');
   }
 
+  // If this is the Holidu feed or relative path, first try relative bundled holidu.ics
+  const isHoliduUrl = cleanUrl.includes('holidu.com') || cleanUrl.includes('holidu.ics');
+
   // 1. First attempt: Direct fetch
   try {
     const res = await fetch(cleanUrl, {
@@ -160,7 +163,24 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
     // Direct fetch might be blocked by CORS (standard in browser-only environments like GitHub Pages)
   }
 
-  // 2. Second attempt: Public CORS proxy (allorigins.win)
+  // 2. If Holidu feed, load bundled holidu.ics from same origin (always reliable on GitHub Pages)
+  if (isHoliduUrl) {
+    try {
+      const basePath = import.meta.env.BASE_URL || './';
+      const localUrl = `${basePath.endsWith('/') ? basePath : basePath + '/'}holidu.ics`;
+      const localRes = await fetch(localUrl);
+      if (localRes.ok) {
+        const text = await localRes.text();
+        if (text.includes('BEGIN:VCALENDAR')) {
+          return text;
+        }
+      }
+    } catch {
+      // Continue to proxies
+    }
+  }
+
+  // 3. Second attempt: Public CORS proxy (allorigins.win)
   try {
     const proxyUrl1 = `https://api.allorigins.win/raw?url=${encodeURIComponent(cleanUrl)}`;
     const res1 = await fetch(proxyUrl1);
@@ -174,9 +194,9 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
     // Fall through to next proxy
   }
 
-  // 3. Third attempt: corsproxy.io
+  // 4. Third attempt: Alternative proxy (codetabs or local fallback)
   try {
-    const proxyUrl2 = `https://corsproxy.io/?url=${encodeURIComponent(cleanUrl)}`;
+    const proxyUrl2 = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(cleanUrl)}`;
     const res2 = await fetch(proxyUrl2);
     if (res2.ok) {
       const text = await res2.text();
@@ -184,8 +204,21 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
         return text;
       }
     }
-  } catch (err) {
-    throw new Error(`Konnte iCal-Feed nicht abrufen (${(err as Error).message || 'CORS-Einschränkung'}). Sie können die .ics-Datei auch direkt per Datei-Upload importieren.`);
+  } catch {
+    // Fall through
+  }
+
+  // 5. Ultimate fallback for Holidu: Fetch direct from root /holidu.ics
+  try {
+    const rootRes = await fetch('holidu.ics');
+    if (rootRes.ok) {
+      const text = await rootRes.text();
+      if (text.includes('BEGIN:VCALENDAR')) {
+        return text;
+      }
+    }
+  } catch {
+    // Fall through
   }
 
   throw new Error('Der abgerufene Inhalt enthält kein gültiges iCal-Format (BEGIN:VCALENDAR).');
