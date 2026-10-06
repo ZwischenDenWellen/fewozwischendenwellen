@@ -8,7 +8,7 @@ export function ReviewsSection() {
       location: 'Berlin',
       date: 'September 2026',
       rating: 5,
-      text: 'Ein echter Traum! Die Wohnung ist blitzsauber, geschmackvoll eingerichtet und die Lage ist unschlagbar – in nur 2 Minuten steht man barfuß am Strand. Besonders die bequemen Betten und der Südbalkon haben unseren Urlaub perfekt gemacht. Wir kommen nächstes Jahr garantiert wieder!'
+      text: 'Ein echter Traum! Die Wohnung ist blitzsauber, geschmackvoll eingerichtet und die Lage ist super. Besonders die bequemen Betten haben unseren Urlaub perfekt gemacht. Wir kommen nächstes Jahr garantiert wieder!'
     },
     {
       id: 'rev-2',
@@ -24,15 +24,15 @@ export function ReviewsSection() {
       location: 'Dresden',
       date: 'Mai 2026',
       rating: 5,
-      text: 'Perfekt für unsere Familie mit zwei Kindern. Das zweite Schlafzimmer ist ideal, die Regendusche eine Wohltat nach langen Fahrradtouren auf dem Darß. Absolut empfehlenswert!'
+      text: 'Perfekt für unsere Familie mit zwei Kindern. Das zweite Schlafzimmer ist ideal, die Dusche eine Wohltat nach langen Fahrradtouren. Absolut empfehlenswert!'
     }
   ];
 
   const ratingCategories = [
     { name: 'Sauberkeit & Hygiene', score: '5.0' },
-    { name: 'Lage & Strandnähe', score: '5.0' },
+    { name: 'Lage & Strandnähe', score: '4.2' },
     { name: 'Kommunikation & Check-in', score: '5.0' },
-    { name: 'Ausstattung & Komfort', score: '4.9' },
+    { name: 'Ausstattung & Komfort', score: '4.7' },
     { name: 'Preis-Leistungs-Verhältnis', score: '4.9' }
   ];
 
@@ -51,7 +51,7 @@ export function ReviewsSection() {
               <span className="font-display font-bold text-2xl text-stone-900">4.97 von 5 Sternen</span>
             </div>
             <p className="text-stone-600 text-sm">
-              Basierend auf über 38 verifizierten Gästebewertungen aus Direktbuchungen und Portalen.
+              Basierend auf Bewertungen aus Direktbuchungen und Portalen.
             </p>
           </div>
 

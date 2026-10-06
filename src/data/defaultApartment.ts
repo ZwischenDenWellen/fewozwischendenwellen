@@ -14,8 +14,8 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   region: "Ostholstein, Schleswig-Holstein",
   country: "Deutschland",
   coordinates: {
-    lat: 54.2933,
-    lng: 10.8872
+    lat: 54.284903456464406,
+    lng: 10.89143073820051
   },
   sizeSqm: 76,
   maxGuests: 4,
