@@ -1,0 +1,6 @@
+{
+  "name": "Ferienwohnung Meerblick – Website & iCal-Kalendersync",
+  "description": "Moderne Ferienwohnung-Website mit interaktivem Belegungskalender, automatischer iCal-Synchronisation (Airbnb, Booking.com) und GitHub Pages Export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
