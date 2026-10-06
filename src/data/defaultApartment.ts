@@ -24,18 +24,18 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   bathrooms: 1, // Bad mit Dusche, WC & zwei Waschbecken
   floor: "Obergeschoss (Einfamilienhaus in Feldrandlage)",
   pricing: {
-    basePricePerNight: 89,          // Nebensaison
-    highSeasonPricePerNight: 129,   // Hauptsaison (Sommer / Feiertage)
-    cleaningFee: 65,                // Einmalige Endreinigung
-    touristTaxPerAdultPerNight: 2.00,// Ostseecard / Kurabgabe
-    deposit: 150,                   // Kaution
+    basePricePerNight: 100,          // Nebensaison
+    highSeasonPricePerNight: 100,   // Hauptsaison (Sommer / Feiertage)
+    cleaningFee: 60,                // Einmalige Endreinigung
+    touristTaxPerAdultPerNight: 0.00,// Ostseecard / Kurabgabe
+    deposit: 0,                   // Kaution
     minimumStayNights: 3,           // Mindestaufenthalt
     discountWeekPercent: 5          // 5% Rabatt ab 7 Nächten
   },
   host: {
     name: "Familie Harms",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    phone: "+49 (0) 171 4589230",
+    phone: "+49 (0) 1629784825",
     email: "harms.mail@web.de",
     bio: "Wir sind eine junge Familie, die hier an der Ostsee aufgewachsen ist und die Region liebt. Wir haben die Ferienwohnung Anfang 2025 frisch renoviert und möchten Ihnen einen perfekten Ausgangspunkt für alle Ostseestrände von Fehmarn bis Grömitz bieten!",
     responseTime: "Antwortet meist innerhalb einer Stunde",
