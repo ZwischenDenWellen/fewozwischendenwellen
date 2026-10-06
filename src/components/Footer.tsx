@@ -22,7 +22,7 @@ export function Footer({ apartment, onOpenGitHubGuide, onOpenHostSettings }: Foo
                 {apartment.name}
               </div>
               <p className="text-stone-400 text-xs max-w-sm leading-relaxed">
-                Renovierte 3-Zimmer Ferienwohnung (76 m²) im Zentrum der Strände in Oldenburg in Holstein. Feldrandlage, 2 Schlafzimmer mit 4 Betten, Bad mit zwei Waschbecken, Küche, WLAN und iCal-Kalendersync.
+                3-Zimmer Ferienwohnung (76 m²) im Zentrum der Strände in Oldenburg in Holstein. Feldrandlage, 2 Schlafzimmer mit 4 Betten, Bad mit zwei Waschbecken, Küche, WLAN.
               </p>
               <div className="text-stone-500 text-2xs">
                 Adresse: {apartment.address}, {apartment.postalCode} {apartment.city}
