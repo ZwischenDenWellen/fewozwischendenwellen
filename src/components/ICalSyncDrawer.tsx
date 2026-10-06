@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, CalendarSync, Download, Plus, Trash2, RefreshCw, Upload, 
-  ExternalLink, Copy, Check, Shield, DollarSign, Home, Sliders
+  ExternalLink, Copy, Check, Shield, DollarSign, Home, Sliders, Mail
 } from 'lucide-react';
 import { ICalFeed, ManualBlock, ApartmentInfo, BookingInquiry } from '../types';
 import { formatDateGerman } from '../utils/ical';
@@ -674,6 +674,16 @@ export function ICalSyncDrawer({
                     className="w-full text-xs p-2 rounded-lg border border-stone-300 bg-white"
                   />
                 </div>
+              </div>
+
+              <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 space-y-1">
+                <div className="font-semibold flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>Direkter E-Mail-Empfang aktiv</span>
+                </div>
+                <p className="text-2xs leading-relaxed text-emerald-800">
+                  Gäste müssen kein eigenes E-Mail-Programm installiert haben. Das Buchungsformular sendet alle Anfragen direkt im Hintergrund an <strong>{editEmail}</strong>. In Ihrem E-Mail-Programm können Sie einfach auf „Antworten“ klicken.
+                </p>
               </div>
 
               <div className="pt-3 flex items-center justify-between">

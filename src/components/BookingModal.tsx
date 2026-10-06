@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Mail, CheckCircle2, User, Phone, MessageSquare } from 'lucide-react';
+import { X, Send, Mail, CheckCircle2, User, Phone, MessageSquare, Loader2, AlertCircle, ExternalLink } from 'lucide-react';
 import { ApartmentInfo, BookingInquiry } from '../types';
 import { formatDateGerman } from '../utils/ical';
 import { buildMailtoInquiry } from '../utils/pricing';
@@ -29,7 +29,11 @@ export function BookingModal({
   const [adults, setAdults] = useState(2);
   const [childrenCount, setChildrenCount] = useState(0);
   const [message, setMessage] = useState('');
+
+  const [isSending, setIsSending] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [activationNotice, setActivationNotice] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -38,11 +42,33 @@ export function BookingModal({
   const end = new Date(checkOut);
   const nights = Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 3600 * 24)));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const mailtoFallbackUrl = buildMailtoInquiry({
+    hostEmail: apartment.host.email,
+    apartmentName: apartment.name,
+    checkIn: formatDateGerman(checkIn),
+    checkOut: formatDateGerman(checkOut),
+    nights,
+    guestsAdults: adults,
+    guestsChildren: childrenCount,
+    guestName: name,
+    guestEmail: email,
+    guestPhone: phone,
+    message,
+    estimatedPrice: totalEstimatedPrice
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
 
-    // Save in local state
+    setIsSending(true);
+    setErrorMessage(null);
+    setActivationNotice(false);
+
+    const checkInFormatted = formatDateGerman(checkIn);
+    const checkOutFormatted = formatDateGerman(checkOut);
+
+    // Save in local storage state
     onSubmitInquiry({
       checkIn,
       checkOut,
@@ -56,26 +82,53 @@ export function BookingModal({
       totalEstimatedPrice
     });
 
-    // Also trigger mailto so user's email client prepares message to host
-    const mailtoUrl = buildMailtoInquiry({
-      hostEmail: apartment.host.email,
-      apartmentName: apartment.name,
-      checkIn: formatDateGerman(checkIn),
-      checkOut: formatDateGerman(checkOut),
-      nights,
-      guestsAdults: adults,
-      guestsChildren: childrenCount,
-      guestName: name,
-      guestEmail: email,
-      guestPhone: phone,
-      message,
-      estimatedPrice: totalEstimatedPrice
-    });
+    try {
+      // Send directly via serverless AJAX form-to-email endpoint (FormSubmit.co)
+      // This sends the email directly from the browser to the host's email inbox!
+      const targetEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(apartment.host.email)}`;
 
-    // Try to open mailto in window
-    window.location.href = mailtoUrl;
+      const payload = {
+        _subject: `Neue Buchungsanfrage: ${apartment.name} (${checkInFormatted} – ${checkOutFormatted})`,
+        _replyto: email, // Host can directly click "Reply" in their email client
+        _captcha: 'false',
+        _template: 'table',
+        'Gast Name': name,
+        'Gast E-Mail': email,
+        'Gast Telefon': phone || 'Nicht angegeben',
+        'Reisezeitraum': `${checkInFormatted} bis ${checkOutFormatted} (${nights} Nächte)`,
+        'Gästeanzahl': `${adults} Erwachsene${childrenCount > 0 ? `, ${childrenCount} Kinder` : ''}`,
+        'Berechneter Richtpreis': `${totalEstimatedPrice.toFixed(2)} €`,
+        'Persönliche Nachricht': message || 'Keine besondere Nachricht angegeben.',
+        'Unterkunft': apartment.name,
+        'Adresse': `${apartment.address}, ${apartment.postalCode} ${apartment.city}`
+      };
 
-    setIsSubmitted(true);
+      const response = await fetch(targetEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok || result.success === 'true' || (result.message && result.message.includes('Activation'))) {
+        if (result.message && result.message.includes('Activation')) {
+          setActivationNotice(true);
+        }
+        setIsSubmitted(true);
+      } else {
+        // If the service returned an error, show graceful fallback
+        setErrorMessage(result.message || 'Die Anfrage konnte nicht direkt übermittelt werden.');
+      }
+    } catch {
+      // Offline or network error: fallback gracefully
+      setErrorMessage('Es konnte keine Verbindung zum Mail-Dienst hergestellt werden.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -88,7 +141,7 @@ export function BookingModal({
               Unverbindliche Buchungsanfrage
             </h3>
             <p className="text-xs text-stone-500 mt-0.5">
-              Direkt an {apartment.host.name}
+              Wird direkt per E-Mail an {apartment.host.name} ({apartment.host.email}) gesendet
             </p>
           </div>
           <button
@@ -109,16 +162,31 @@ export function BookingModal({
               Vielen Dank für Ihre Anfrage!
             </h4>
             <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-              Ihre Anfrage für den Zeitraum <strong>{formatDateGerman(checkIn)} bis {formatDateGerman(checkOut)}</strong> wurde erfasst und Ihr E-Mail-Programm wurde mit allen Daten vorbereitet.
+              Ihre Buchungsanfrage für den Zeitraum <strong>{formatDateGerman(checkIn)} bis {formatDateGerman(checkOut)}</strong> wurde erfolgreich an die Gastgeber übermittelt.
             </p>
-            <p className="text-xs text-stone-500">
-              Die Gastgeber ({apartment.host.name}) melden sich innerhalb kürzester Zeit mit der Reservierungsbestätigung.
-            </p>
+
+            <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-600 max-w-md mx-auto space-y-1 text-left">
+              <div className="font-semibold text-stone-900 flex items-center gap-1.5">
+                <Mail className="w-4 h-4 text-emerald-600" />
+                <span>Direktversand abgeschlossen</span>
+              </div>
+              <div>Der Vermieter hat alle Kontaktdaten und Reisedaten direkt per E-Mail erhalten und wird sich in Kürze bei Ihnen melden.</div>
+            </div>
+
+            {activationNotice && (
+              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 text-left space-y-1">
+                <span className="font-bold block">Hinweis für den Vermieter ({apartment.host.email}):</span>
+                <span>
+                  Da dies die erste Anfrage über dieses Formular ist, hat FormSubmit eine einmalige Bestätigungs-Mail mit einem Button „Activate Form“ an Ihr Postfach gesendet. Bitte klicken Sie einmal darauf, um den Spamfilter zu aktivieren.
+                </span>
+              </div>
+            )}
+
             <button
               onClick={onClose}
               className="mt-4 px-6 py-2.5 rounded-lg bg-stone-900 text-white font-semibold text-sm hover:bg-stone-800 transition-colors"
             >
-              Schließen
+              Fenster schließen
             </button>
           </div>
         ) : (
@@ -136,6 +204,25 @@ export function BookingModal({
                 <span className="text-base font-bold font-display text-amber-900">{totalEstimatedPrice.toFixed(2)} €</span>
               </div>
             </div>
+
+            {/* Error Message with fallback */}
+            {errorMessage && (
+              <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 space-y-2">
+                <div className="flex items-center gap-2 font-medium">
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+                <div>
+                  <a
+                    href={mailtoFallbackUrl}
+                    className="inline-flex items-center gap-1.5 text-xs text-rose-900 font-bold underline hover:text-rose-950"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Alternativ jetzt über Ihr E-Mail-Programm senden</span>
+                  </a>
+                </div>
+              </div>
+            )}
 
             {/* Guest counts */}
             <div className="grid grid-cols-2 gap-3">
@@ -173,7 +260,7 @@ export function BookingModal({
                 <input
                   type="text"
                   required
-                  placeholder="z.B. Sabine Mustermann"
+                  placeholder="z.B. Max Mustermann"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   className="w-full text-sm border border-stone-300 rounded-lg py-2.5 pl-9 pr-3 text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800/20"
@@ -190,7 +277,7 @@ export function BookingModal({
                   <input
                     type="email"
                     required
-                    placeholder="name@beispiel.de"
+                    placeholder="gast@beispiel.de"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     className="w-full text-sm border border-stone-300 rounded-lg py-2.5 pl-9 pr-3 text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800/20"
@@ -199,7 +286,7 @@ export function BookingModal({
               </div>
 
               <div>
-                <label className="text-2xs font-semibold text-stone-600 uppercase block mb-1">Telefonnummer</label>
+                <label className="text-2xs font-semibold text-stone-600 uppercase block mb-1">Telefonnummer (optional)</label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
                   <input
@@ -220,7 +307,7 @@ export function BookingModal({
                 <MessageSquare className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
                 <textarea
                   rows={3}
-                  placeholder="z.B. Anreisezeit ca. 16 Uhr, Babybett gewünscht..."
+                  placeholder="z.B. Ungefähre Ankunftszeit, Fragen zur Umgebung..."
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                   className="w-full text-sm border border-stone-300 rounded-lg py-2 pl-9 pr-3 text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800/20"
@@ -232,13 +319,23 @@ export function BookingModal({
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 px-4 rounded-xl bg-amber-800 hover:bg-amber-900 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:shadow active:scale-99"
+                disabled={isSending}
+                className="w-full py-3.5 px-4 rounded-xl bg-amber-800 hover:bg-amber-900 disabled:bg-amber-800/60 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all hover:shadow active:scale-99 cursor-pointer"
               >
-                <Send className="w-4 h-4" />
-                <span>Anfrage jetzt absenden</span>
+                {isSending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Wird direkt gesendet...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Anfrage jetzt absenden</span>
+                  </>
+                )}
               </button>
               <div className="text-center text-2xs text-stone-400 mt-2">
-                Ihre Daten werden vertraulich behandelt und ausschließlich zur Abwicklung dieser Buchungsanfrage verwendet.
+                Kein Mailprogramm erforderlich. Ihre Anfrage wird direkt und vertraulich an die Gastgeber übertragen.
               </div>
             </div>
           </form>
