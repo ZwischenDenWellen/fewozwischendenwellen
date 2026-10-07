@@ -62,9 +62,6 @@ export function ICalSyncDrawer({
   const [blockEnd, setBlockEnd] = useState('');
   const [blockReason, setBlockReason] = useState('Eigentümer-Eigenbedarf');
 
-  // Copy feedback
-  const [hasCopiedExport, setHasCopiedExport] = useState(false);
-
   // Settings form local state
   const [editPriceBase, setEditPriceBase] = useState(apartment.pricing.basePricePerNight);
   const [editPriceHigh, setEditPriceHigh] = useState(apartment.pricing.highSeasonPricePerNight);
@@ -105,13 +102,6 @@ export function ICalSyncDrawer({
 
     setBlockStart('');
     setBlockEnd('');
-  };
-
-  const handleCopyICal = () => {
-    const ics = getExportICalContent();
-    navigator.clipboard.writeText(ics);
-    setHasCopiedExport(true);
-    setTimeout(() => setHasCopiedExport(false), 3000);
   };
 
   const handleSaveSettings = (e: React.FormEvent) => {
@@ -388,73 +378,7 @@ export function ICalSyncDrawer({
             </div>
           )}
 
-          {/* TAB 2: iCal Export */}
-          {activeTab === 'export' && (
-            <div className="space-y-6">
-              <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-2">
-                <h4 className="font-bold flex items-center gap-1.5">
-                  <ExternalLink className="w-4 h-4" />
-                  So binden Sie diesen Kalender in Airbnb & Booking.com ein
-                </h4>
-                <p className="leading-relaxed">
-                  Damit externe Portale wissen, wann Ihre Fewo belegt ist (durch Direktbucher oder Ihre Eigenbedarfssperren), exportieren Sie diesen Kalender.
-                </p>
-                <ol className="list-decimal list-inside space-y-1 font-medium pl-1 text-2xs">
-                  <li>Laden Sie die .ics-Datei herunter oder kopieren Sie den Kalender-Inhalt.</li>
-                  <li>Öffnen Sie Ihr Vermieterportal (z.B. Airbnb &rarr; Kalender synchronisieren &rarr; Kalender importieren).</li>
-                  <li>Hinterlegen Sie die Kalenderdatei als Quelle. Fertig!</li>
-                </ol>
-              </div>
-
-              {/* Download Action */}
-              <div className="p-4 rounded-xl border border-stone-200 bg-white space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h5 className="font-semibold text-stone-900 text-sm">Kalenderdatei herunterladen</h5>
-                    <p className="text-xs text-stone-500">Enthält alle aktuellen Reservierungen im RFC 5545 iCalendar-Format.</p>
-                  </div>
-                  <button
-                    onClick={onDownloadICal}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold shadow-xs"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>.ics herunterladen</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Copy Raw iCal text */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Vorschau iCalendar Feed (RFC 5545)</span>
-                  <button
-                    onClick={handleCopyICal}
-                    className="flex items-center gap-1 text-xs text-amber-800 hover:underline font-semibold"
-                  >
-                    {hasCopiedExport ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-700">Kopiert!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>In Zwischenablage kopieren</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-                <textarea
-                  readOnly
-                  rows={8}
-                  value={getExportICalContent()}
-                  className="w-full text-2xs font-mono p-3 bg-stone-900 text-stone-200 rounded-xl focus:outline-none resize-none"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* TAB 3: Sperrzeiten (Manual Blocks) */}
+          {/* TAB: Sperrzeiten (Manual Blocks) */}
           {activeTab === 'blocks' && (
             <div className="space-y-6">
               <div>

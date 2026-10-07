@@ -1,22 +1,18 @@
-import { Calendar, Settings, Github, Sparkles, MapPin } from 'lucide-react';
+import { Calendar, Sparkles, MapPin } from 'lucide-react';
 import { ApartmentInfo, ICalFeed } from '../types';
 
 interface NavbarProps {
   apartment: ApartmentInfo;
-  feeds: ICalFeed[];
-  onOpenHostSettings: () => void;
-  onOpenGitHubGuide: () => void;
+  feeds?: ICalFeed[];
+  onOpenHostSettings?: () => void;
+  onOpenGitHubGuide?: () => void;
   onScrollToCalendar: () => void;
 }
 
 export function Navbar({
   apartment,
-  feeds,
-  onOpenHostSettings,
-  onOpenGitHubGuide,
   onScrollToCalendar
 }: NavbarProps) {
-  const activeFeedsCount = feeds.filter(f => f.enabled).length;
 
   return (
     <header className="sticky top-0 z-40 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">

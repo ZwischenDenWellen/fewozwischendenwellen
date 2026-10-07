@@ -4,11 +4,11 @@ import { ApartmentInfo } from '../types';
 
 interface FooterProps {
   apartment: ApartmentInfo;
-  onOpenGitHubGuide: () => void;
-  onOpenHostSettings: () => void;
+  onOpenGitHubGuide?: () => void;
+  onOpenHostSettings?: () => void;
 }
 
-export function Footer({ apartment, onOpenGitHubGuide, onOpenHostSettings }: FooterProps) {
+export function Footer({ apartment }: FooterProps) {
   const [legalModalType, setLegalModalType] = useState<'impressum' | 'datenschutz' | null>(null);
 
   return (
