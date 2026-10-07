@@ -74,7 +74,7 @@ export function LocationSection({ apartment }: LocationSectionProps) {
               {/* Stylized OpenStreetMap Embed or Interactive Visual View */}
               <iframe
                 title="Lage der Ferienwohnung"
-                src={`https://www.openstreetmap.org/export/embed.html?bbox=12.6700%2C54.4280%2C12.6990%2C54.4420&layer=mapnik&marker=${apartment.coordinates.lat}%2C${apartment.coordinates.lng}`}
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=10.88%2C54.28%2C10.91%2C54.2849&layer=mapnik&marker=54.284957%2C10.891743`}
                 className="w-full h-full border-0"
                 loading="lazy"
               />

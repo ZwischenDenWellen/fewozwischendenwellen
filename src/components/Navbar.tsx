@@ -32,27 +32,6 @@ export function Navbar({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand / Logo Placeholder */}
-        <div className="flex items-center gap-3">
-          <a href="#" className="flex items-center gap-2.5 group">
-            {/* Logo Placeholder Box */}
-            <div
-              title="Logo-Platzhalter (kann später durch Ihr Bild-Logo ersetzt werden)"
-              className="h-11 px-3.5 rounded-xl border border-dashed border-stone-300 hover:border-amber-800 bg-stone-50 hover:bg-stone-100 flex items-center justify-center gap-2 transition-all shadow-2xs"
-            >
-              <ImageIcon className="w-4 h-4 text-stone-400 group-hover:text-amber-800 transition-colors" />
-              <span className="text-xs font-bold uppercase tracking-wider text-stone-600 group-hover:text-amber-900 transition-colors">
-                LOGO
-              </span>
-            </div>
-
-            {/* City subtitle */}
-            <span className="text-2xs text-stone-500 hidden sm:flex items-center gap-1 font-medium">
-              <MapPin className="w-3 h-3 text-amber-700" />
-              {apartment.city}
-            </span>
-          </a>
-        </div>
 
         {/* Navigation links (Desktop & Tablets) */}
         <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-xs sm:text-sm font-medium text-stone-600">
@@ -67,7 +46,6 @@ export function Navbar({
             <Calendar className="w-4 h-4 text-amber-700" />
             <span>Belegungskalender</span>
           </a>
-          <a href="#kontakt" className="hover:text-stone-900 transition-colors">Kontakt</a>
         </nav>
 
         {/* Action controls & Mobile menu toggle */}
