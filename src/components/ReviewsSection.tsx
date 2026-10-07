@@ -48,7 +48,7 @@ export function ReviewsSection() {
                   <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <span className="font-display font-bold text-2xl text-stone-900">4.97 von 5 Sternen</span>
+              <span className="font-display font-bold text-2xl text-stone-900">4.8 von 5 Sternen</span>
             </div>
             <p className="text-stone-600 text-sm">
               Basierend auf Bewertungen aus Direktbuchungen und Portalen.

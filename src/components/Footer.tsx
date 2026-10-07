@@ -47,22 +47,6 @@ export function Footer({ apartment, onOpenGitHubGuide, onOpenHostSettings }: Foo
               <ul className="space-y-1.5 text-xs">
                 <li>
                   <button
-                    onClick={onOpenHostSettings}
-                    className="hover:text-amber-300 text-stone-300 transition-colors text-left"
-                  >
-                    Vermieter-Bereich (iCal Sync)
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={onOpenGitHubGuide}
-                    className="hover:text-white transition-colors text-left"
-                  >
-                    GitHub Pages Bereitstellung
-                  </button>
-                </li>
-                <li>
-                  <button
                     onClick={() => setLegalModalType('impressum')}
                     className="hover:text-white transition-colors text-left"
                   >
@@ -83,7 +67,7 @@ export function Footer({ apartment, onOpenGitHubGuide, onOpenHostSettings }: Foo
 
           <div className="pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-2xs text-stone-500">
             <div>
-              © {new Date().getFullYear()} {apartment.name}. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} Ferienwohnung zwischen den Wellen. Alle Rechte vorbehalten.
             </div>
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1">

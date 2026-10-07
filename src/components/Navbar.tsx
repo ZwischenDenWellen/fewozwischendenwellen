@@ -50,17 +50,7 @@ export function Navbar({
 
         {/* Action controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* GitHub Pages Guide button */}
-          <button
-            onClick={onOpenGitHubGuide}
-            title="GitHub Pages Bereitstellung & Anleitung"
-            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-lg border border-stone-300 hover:border-stone-400 bg-white text-stone-700 hover:text-stone-900 transition-all shadow-xs"
-          >
-            <Github className="w-4 h-4" />
-            <span className="hidden sm:inline">GitHub Pages</span>
-          </button>
-  
-      
+
           {/* Primary CTA */}
           <button
             onClick={onScrollToCalendar}

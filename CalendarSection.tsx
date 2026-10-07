@@ -285,29 +285,6 @@ export function CalendarSection({
               Wählen Sie Ihren Wunschzeitraum für eine unverbindliche Buchungsanfrage zum garantierten Direktbucherpreis.
             </p>
           </div>
-
-          {/* Sync actions toolbar */}
-          {/* Calendar Actions */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={onSyncAllFeeds}
-              disabled={isSyncingAll}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-sky-50 border border-sky-200 text-sky-900 hover:bg-sky-100 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
-              title="Aktuelle Belegungen von Holidu abrufen"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-sky-700' : 'text-sky-600'}`} />
-              <span>{isSyncingAll ? 'Aktualisiere...' : 'Mit Holidu abgleichen'}</span>
-            </button>
-
-            <button
-              onClick={onOpenHostSettings}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-stone-800 text-white hover:bg-stone-900 transition-colors shadow-2xs cursor-pointer"
-              title="Vermieter-Einstellungen & Kalendersync einsehen"
-            >
-              <Settings className="w-3.5 h-3.5 text-amber-300" />
-              <span>Vermieter-Bereich</span>
-            </button>
-          </div>
         </div>
 
         {/* Sync message banner if any */}
@@ -572,34 +549,6 @@ export function CalendarSection({
                 <span>Keine versteckten Servicegebühren von Drittportalen</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Feeds status list bar */}
-        <div className="mt-8 p-4 rounded-xl bg-white border border-stone-200 shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs">
-          <div className="flex items-center gap-3">
-            <span className="font-semibold text-stone-900">Synchronisierte Portale:</span>
-            <div className="flex items-center gap-2">
-              {feeds.map(feed => (
-                <div
-                  key={feed.id}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-2xs font-medium border"
-                  style={{
-                    backgroundColor: `${feed.color}15`,
-                    borderColor: `${feed.color}40`,
-                    color: feed.color
-                  }}
-                >
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: feed.color }} />
-                  <span>{feed.name}</span>
-                  <span className="text-stone-400 font-normal">({feed.eventCount} Buchungen)</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-stone-500 text-2xs">
-            Alle iCal-Synchronisationen erfolgen automatisch und bidirektional nach RFC 5545 Standard.
           </div>
         </div>
       </div>
