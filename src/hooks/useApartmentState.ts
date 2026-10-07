@@ -4,11 +4,11 @@ import { DEFAULT_APARTMENT, DEFAULT_ICAL_FEEDS, INITIAL_DEMO_EVENTS, INITIAL_MAN
 import { parseICalData, fetchICalFromUrl, generateICalContent, downloadICalFile } from '../utils/ical';
 
 const STORAGE_KEYS = {
-  APARTMENT: 'fewo_apartment_info_v7',
-  FEEDS: 'fewo_ical_feeds_v7',
-  EVENTS: 'fewo_synced_events_v7',
-  BLOCKS: 'fewo_manual_blocks_v7',
-  INQUIRIES: 'fewo_inquiries_v7'
+  APARTMENT: 'fewo_apartment_info_v8',
+  FEEDS: 'fewo_ical_feeds_v8',
+  EVENTS: 'fewo_synced_events_v8',
+  BLOCKS: 'fewo_manual_blocks_v8',
+  INQUIRIES: 'fewo_inquiries_v8'
 };
 
 export function useApartmentState() {

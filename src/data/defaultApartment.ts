@@ -25,9 +25,9 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   bathrooms: 1, // Bad mit Dusche, WC & zwei Waschbecken
   floor: "Obergeschoss (Einfamilienhaus in Feldrandlage)",
   pricing: {
-    basePricePerNight: 100,          // Nebensaison
-    highSeasonPricePerNight: 100,   // Hauptsaison (Sommer / Feiertage)
-    cleaningFee: 60,                // Einmalige Endreinigung
+    basePricePerNight: 95,          // Nebensaison
+    highSeasonPricePerNight: 95,   // Hauptsaison (Sommer / Feiertage)
+    cleaningFee: 55,                // Einmalige Endreinigung
     touristTaxPerAdultPerNight: 0.00,// Ostseecard / Kurabgabe
     deposit: 0,                   // Kaution
     minimumStayNights: 3,           // Mindestaufenthalt
