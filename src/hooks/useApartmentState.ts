@@ -144,7 +144,7 @@ export function useApartmentState() {
         errorMessage: undefined
       } : f));
 
-      setSyncStatusMessage(`Feed "${feed.name}" erfolgreich aktualisiert (${parsedEvents.length} Belegungen gefunden).`);
+      setSyncStatusMessage(`Erfolgreich mit Holidu synchronisiert (${parsedEvents.length} Belegungen aktiv).`);
     } catch (err) {
       const msg = (err as Error).message || 'Fehler beim Abrufen';
       setFeeds(prev => prev.map(f => f.id === feedId ? {

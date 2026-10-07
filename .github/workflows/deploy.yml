@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  schedule:
+    # Automatically sync with Holidu every hour
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -32,6 +35,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+
+      - name: Fetch live Holidu iCal feed
+        run: |
+          mkdir -p public
+          curl -sL "https://api.host.holidu.com/ical/e1tcvw2oaxy-z5ob-vevl.ics" -o public/holidu.ics || true
+          ls -lh public/holidu.ics
 
       - name: Build project
         run: npm run build

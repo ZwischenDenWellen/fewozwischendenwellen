@@ -263,6 +263,14 @@ export function CalendarSection({
   const month1Days = useMemo(() => getDaysForMonth(month1Date), [month1Date, todayIso, blockedNightsMap, checkInDate, checkOutDate, hoveredDate]);
   const month2Days = useMemo(() => getDaysForMonth(month2Date), [month2Date, todayIso, blockedNightsMap, checkInDate, checkOutDate, hoveredDate]);
 
+  // Quick jump helper to navigate directly to a future month
+  const jumpToMonth = (targetYear: number, targetMonth: number) => {
+    const diff = (targetYear - today.getFullYear()) * 12 + (targetMonth - today.getMonth());
+    if (diff >= 0) {
+      setMonthOffset(diff);
+    }
+  };
+
   const monthNames = [
     'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
     'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
@@ -363,6 +371,42 @@ export function CalendarSection({
                   <ChevronRight className="w-4 h-4 text-stone-700" />
                 </button>
               </div>
+            </div>
+
+            {/* Quick Jumps to Holidu Booked Months */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 pb-1 text-2xs text-stone-600">
+              <span className="font-semibold text-stone-800 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+                <span>Monats-Direktwahl:</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => jumpToMonth(2026, 10)}
+                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
+              >
+                Nov 2026 (Belegt)
+              </button>
+              <button
+                type="button"
+                onClick={() => jumpToMonth(2027, 2)}
+                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
+              >
+                März 2027 (Belegt)
+              </button>
+              <button
+                type="button"
+                onClick={() => jumpToMonth(2027, 4)}
+                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
+              >
+                Mai 2027 (Belegt)
+              </button>
+              <button
+                type="button"
+                onClick={() => jumpToMonth(2027, 6)}
+                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
+              >
+                Sommer 2027 (Belegt)
+              </button>
             </div>
 
             {/* Validation alert if user clicked invalid range */}
@@ -579,31 +623,69 @@ export function CalendarSection({
           </div>
         </div>
 
-        {/* Feeds status list bar */}
-        <div className="mt-8 p-4 rounded-xl bg-white border border-stone-200 shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs">
-          <div className="flex items-center gap-3">
-            <span className="font-semibold text-stone-900">Synchronisierte Portale:</span>
+        {/* Feeds status and synchronized bookings overview */}
+        <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <h3 className="font-display font-bold text-base sm:text-lg text-stone-900">
+                  Holidu Live-Kalendersynchronisation
+                </h3>
+              </div>
+              <p className="text-xs text-stone-500 mt-0.5">
+                Datenquelle: <span className="font-mono text-2xs text-stone-700 bg-stone-100 px-1.5 py-0.5 rounded">https://api.host.holidu.com/ical/e1tcvw2oaxy-z5ob-vevl.ics</span>
+              </p>
+            </div>
+
             <div className="flex items-center gap-2">
-              {feeds.map(feed => (
-                <div
-                  key={feed.id}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-2xs font-medium border"
-                  style={{
-                    backgroundColor: `${feed.color}15`,
-                    borderColor: `${feed.color}40`,
-                    color: feed.color
-                  }}
-                >
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: feed.color }} />
-                  <span>{feed.name}</span>
-                  <span className="text-stone-400 font-normal">({feed.eventCount} Buchungen)</span>
-                </div>
-              ))}
+              <span className="text-xs px-3 py-1 rounded-full bg-sky-50 text-sky-800 font-semibold border border-sky-200">
+                {events.length} Zeiträume synchronisiert
+              </span>
+              <button
+                type="button"
+                onClick={onSyncAllFeeds}
+                disabled={isSyncingAll}
+                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 transition-colors cursor-pointer"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-sky-700' : 'text-stone-600'}`} />
+                <span>{isSyncingAll ? 'Prüfe...' : 'Jetzt aktualisieren'}</span>
+              </button>
             </div>
           </div>
 
-          <div className="text-stone-500 text-2xs">
-            Alle iCal-Synchronisationen erfolgen automatisch und bidirektional nach RFC 5545 Standard.
+          <div className="space-y-2">
+            <span className="text-2xs font-bold uppercase tracking-wider text-stone-500">
+              Synchronisierte Buchungen & Sperrzeiten aus Holidu (Portalsperren & Direktbelegungen):
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
+              {events.map((ev, i) => (
+                <div
+                  key={ev.uid || i}
+                  className="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs flex items-center justify-between hover:border-sky-300 transition-colors"
+                >
+                  <div>
+                    <div className="font-semibold text-stone-900 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-sky-500" />
+                      <span>{formatDateGerman(ev.startDate)} – {formatDateGerman(ev.endDate)}</span>
+                    </div>
+                    <div className="text-2xs text-stone-500 mt-0.5">
+                      {ev.summary || 'Belegt'} · Holidu Sync
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const [y, m] = ev.startDate.split('-').map(Number);
+                      jumpToMonth(y, m - 1);
+                    }}
+                    className="text-2xs font-semibold text-sky-700 hover:text-sky-900 underline px-1 py-1 cursor-pointer"
+                  >
+                    Anzeigen &rarr;
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -651,20 +733,9 @@ function DayCell({ day, onClick, onMouseEnter, onMouseLeave }: DayCellProps) {
     bgClass = 'bg-amber-100 text-amber-900 font-medium';
     borderClass = 'border-amber-200';
   } else if (day.isBlocked) {
-    // Determine feed coloring
-    const isAirbnb = day.blockInfo?.feedName?.toLowerCase().includes('airbnb');
-    const isBooking = day.blockInfo?.feedName?.toLowerCase().includes('booking');
-    
-    if (isAirbnb) {
-      bgClass = 'bg-rose-50 text-rose-800 hover:bg-rose-100 font-medium';
-      borderClass = 'border-rose-200';
-    } else if (isBooking) {
-      bgClass = 'bg-sky-50 text-sky-800 hover:bg-sky-100 font-medium';
-      borderClass = 'border-sky-200';
-    } else {
-      bgClass = 'bg-stone-200 text-stone-600 font-medium';
-      borderClass = 'border-stone-300';
-    }
+    bgClass = 'bg-sky-100 text-sky-900 font-medium border-sky-300';
+    borderClass = 'border-sky-300';
+    cursorClass = 'cursor-not-allowed';
   }
 
   return (

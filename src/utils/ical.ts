@@ -143,16 +143,45 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
     throw new Error('Keine URL angegeben.');
   }
 
-  // If this is the Holidu feed or relative path, first try relative bundled holidu.ics
   const isHoliduUrl = cleanUrl.includes('holidu.com') || cleanUrl.includes('holidu.ics');
 
-  // 1. First attempt: Direct fetch
+  // 1. For Holidu feed on GitHub Pages: load the verified bundled feed first (fast, reliable, zero CORS issues)
+  if (isHoliduUrl) {
+    const basePath = import.meta.env.BASE_URL || './';
+    const cleanBase = basePath.endsWith('/') ? basePath : basePath + '/';
+    const localUrls = [
+      `${cleanBase}holidu.ics?t=${Date.now()}`,
+      `./holidu.ics?t=${Date.now()}`,
+      `holidu.ics?t=${Date.now()}`,
+      `/fewozwischendenwellen/holidu.ics?t=${Date.now()}`
+    ];
+
+    for (const localUrl of localUrls) {
+      try {
+        const localRes = await fetch(localUrl);
+        if (localRes.ok) {
+          const text = await localRes.text();
+          if (text.includes('BEGIN:VCALENDAR')) {
+            return text;
+          }
+        }
+      } catch {
+        // Try next local path
+      }
+    }
+  }
+
+  // 2. Direct fetch with 4s timeout (for feeds that support CORS)
   try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
     const res = await fetch(cleanUrl, {
+      signal: ctrl.signal,
       headers: {
         'Accept': 'text/calendar, text/plain, */*'
       }
     });
+    clearTimeout(timer);
     if (res.ok) {
       const text = await res.text();
       if (text.includes('BEGIN:VCALENDAR')) {
@@ -160,65 +189,24 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
       }
     }
   } catch {
-    // Direct fetch might be blocked by CORS (standard in browser-only environments like GitHub Pages)
+    // Direct fetch might be blocked by CORS
   }
 
-  // 2. If Holidu feed, load bundled holidu.ics from same origin (always reliable on GitHub Pages)
-  if (isHoliduUrl) {
-    try {
-      const basePath = import.meta.env.BASE_URL || './';
-      const localUrl = `${basePath.endsWith('/') ? basePath : basePath + '/'}holidu.ics`;
-      const localRes = await fetch(localUrl);
-      if (localRes.ok) {
-        const text = await localRes.text();
-        if (text.includes('BEGIN:VCALENDAR')) {
-          return text;
-        }
-      }
-    } catch {
-      // Continue to proxies
-    }
-  }
-
-  // 3. Second attempt: Public CORS proxy (allorigins.win)
+  // 3. Fallback: Public CORS proxy with timeout
   try {
-    const proxyUrl1 = `https://api.allorigins.win/raw?url=${encodeURIComponent(cleanUrl)}`;
-    const res1 = await fetch(proxyUrl1);
-    if (res1.ok) {
-      const text = await res1.text();
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(cleanUrl)}`;
+    const res = await fetch(proxyUrl, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (res.ok) {
+      const text = await res.text();
       if (text.includes('BEGIN:VCALENDAR')) {
         return text;
       }
     }
   } catch {
-    // Fall through to next proxy
-  }
-
-  // 4. Third attempt: Alternative proxy (codetabs or local fallback)
-  try {
-    const proxyUrl2 = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(cleanUrl)}`;
-    const res2 = await fetch(proxyUrl2);
-    if (res2.ok) {
-      const text = await res2.text();
-      if (text.includes('BEGIN:VCALENDAR')) {
-        return text;
-      }
-    }
-  } catch {
-    // Fall through
-  }
-
-  // 5. Ultimate fallback for Holidu: Fetch direct from root /holidu.ics
-  try {
-    const rootRes = await fetch('holidu.ics');
-    if (rootRes.ok) {
-      const text = await rootRes.text();
-      if (text.includes('BEGIN:VCALENDAR')) {
-        return text;
-      }
-    }
-  } catch {
-    // Fall through
+    // Continue
   }
 
   throw new Error('Der abgerufene Inhalt enthält kein gültiges iCal-Format (BEGIN:VCALENDAR).');
