@@ -2,6 +2,7 @@ import { ApartmentInfo, ICalFeed, ManualBlock } from '../types';
 import { INITIAL_HOLIDU_EVENTS } from './holiduEvents';
 
 export const HOLIDU_ICAL_URL = "https://api.host.holidu.com/ical/e1tcvw2oaxy-z5ob-vevl.ics";
+export const FEWO_ICAL_URL = "https://www.fewo-direkt.de/icalendar/5da3eb3a826540fa8a78074dc2772fe2.ics";
 
 export const DEFAULT_APARTMENT: ApartmentInfo = {
   name: "3-Zimmer Ferienwohnung im Zentrum der Strände",
@@ -110,16 +111,26 @@ export const DEFAULT_APARTMENT: ApartmentInfo = {
   ]
 };
 
-// Central Holidu iCal feed (Channel Manager syncing FeWo-direkt, Airbnb, Booking.com)
+// Combined iCal feeds (automatically synced, neutral names without public source exposure)
 export const DEFAULT_ICAL_FEEDS: ICalFeed[] = [
   {
     id: "feed-holidu",
-    name: "Holidu Kalendersync",
+    name: "Belegungskalender 1",
     url: HOLIDU_ICAL_URL,
-    color: "#0284c7", // Holidu sky blue
+    color: "#78716c",
     enabled: true,
     lastSyncedAt: new Date().toISOString(),
-    eventCount: INITIAL_HOLIDU_EVENTS.length,
+    eventCount: 13,
+    status: "ok"
+  },
+  {
+    id: "feed-fewo",
+    name: "Belegungskalender 2",
+    url: FEWO_ICAL_URL,
+    color: "#78716c",
+    enabled: true,
+    lastSyncedAt: new Date().toISOString(),
+    eventCount: 12,
     status: "ok"
   }
 ];

@@ -50,8 +50,8 @@ export function parseICalData(
           events.push({
             uid: currentEvent.uid || `event-${Math.random().toString(36).substring(2, 9)}`,
             feedId,
-            feedName,
-            summary: currentEvent.summary || `${feedName} Belegung`,
+            feedName: 'Belegt',
+            summary: 'Belegt',
             startDate,
             endDate,
             color: feedColor
@@ -144,16 +144,19 @@ export async function fetchICalFromUrl(url: string): Promise<string> {
   }
 
   const isHoliduUrl = cleanUrl.includes('holidu.com') || cleanUrl.includes('holidu.ics');
+  const isFewoUrl = cleanUrl.includes('fewo-direkt.de') || cleanUrl.includes('fewo.ics') || cleanUrl.includes('homeaway');
 
-  // 1. For Holidu feed on GitHub Pages: load the verified bundled feed first (fast, reliable, zero CORS issues)
-  if (isHoliduUrl) {
+  const staticFileName = isHoliduUrl ? 'holidu.ics' : isFewoUrl ? 'fewo.ics' : null;
+
+  // 1. For bundled feeds on GitHub Pages: load the verified local feed first (fast, reliable, zero CORS issues)
+  if (staticFileName) {
     const basePath = import.meta.env.BASE_URL || './';
     const cleanBase = basePath.endsWith('/') ? basePath : basePath + '/';
     const localUrls = [
-      `${cleanBase}holidu.ics?t=${Date.now()}`,
-      `./holidu.ics?t=${Date.now()}`,
-      `holidu.ics?t=${Date.now()}`,
-      `/fewozwischendenwellen/holidu.ics?t=${Date.now()}`
+      `${cleanBase}${staticFileName}?t=${Date.now()}`,
+      `./${staticFileName}?t=${Date.now()}`,
+      `${staticFileName}?t=${Date.now()}`,
+      `/fewozwischendenwellen/${staticFileName}?t=${Date.now()}`
     ];
 
     for (const localUrl of localUrls) {

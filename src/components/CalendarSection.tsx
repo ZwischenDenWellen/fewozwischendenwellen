@@ -263,14 +263,6 @@ export function CalendarSection({
   const month1Days = useMemo(() => getDaysForMonth(month1Date), [month1Date, todayIso, blockedNightsMap, checkInDate, checkOutDate, hoveredDate]);
   const month2Days = useMemo(() => getDaysForMonth(month2Date), [month2Date, todayIso, blockedNightsMap, checkInDate, checkOutDate, hoveredDate]);
 
-  // Quick jump helper to navigate directly to a future month
-  const jumpToMonth = (targetYear: number, targetMonth: number) => {
-    const diff = (targetYear - today.getFullYear()) * 12 + (targetMonth - today.getMonth());
-    if (diff >= 0) {
-      setMonthOffset(diff);
-    }
-  };
-
   const monthNames = [
     'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
     'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
@@ -293,44 +285,15 @@ export function CalendarSection({
               Wählen Sie Ihren Wunschzeitraum für eine unverbindliche Buchungsanfrage zum garantierten Direktbucherpreis.
             </p>
           </div>
-
-          {/* Sync actions toolbar */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={onSyncAllFeeds}
-              disabled={isSyncingAll}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg bg-sky-50 border border-sky-200 text-sky-900 hover:bg-sky-100 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
-              title="Aktuelle Belegungen von Holidu abrufen"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-sky-700' : 'text-sky-600'}`} />
-              <span>{isSyncingAll ? 'Synchronisiere...' : 'Mit Holidu abgleichen'}</span>
-            </button>
-
-            <button
-              onClick={onOpenHostSettings}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-stone-800 text-white hover:bg-stone-900 transition-colors shadow-2xs cursor-pointer"
-              title="Vermieter-Einstellungen einsehen"
-            >
-              <Settings className="w-3.5 h-3.5 text-amber-300" />
-              <span>Vermieter-Bereich</span>
-            </button>
-          </div>
-
         </div>
 
         {/* Sync message banner if any */}
         {syncStatusMessage && (
-          <div className="mb-6 p-3 rounded-xl bg-sky-50 border border-sky-200 text-xs text-sky-900 flex items-center justify-between">
+          <div className="mb-6 p-3 rounded-xl bg-stone-100 border border-stone-200 text-xs text-stone-800 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-sky-600 shrink-0" />
-              <span>{syncStatusMessage}</span>
+              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Kalender ist auf dem aktuellen Stand.</span>
             </div>
-            <button
-              onClick={() => onSyncAllFeeds()}
-              className="text-sky-800 font-semibold underline text-2xs cursor-pointer"
-            >
-              Erneut abgleichen
-            </button>
           </div>
         )}
 
@@ -371,42 +334,6 @@ export function CalendarSection({
                   <ChevronRight className="w-4 h-4 text-stone-700" />
                 </button>
               </div>
-            </div>
-
-            {/* Quick Jumps to Holidu Booked Months */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 pb-1 text-2xs text-stone-600">
-              <span className="font-semibold text-stone-800 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
-                <span>Monats-Direktwahl:</span>
-              </span>
-              <button
-                type="button"
-                onClick={() => jumpToMonth(2026, 10)}
-                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
-              >
-                Nov 2026 (Belegt)
-              </button>
-              <button
-                type="button"
-                onClick={() => jumpToMonth(2027, 2)}
-                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
-              >
-                März 2027 (Belegt)
-              </button>
-              <button
-                type="button"
-                onClick={() => jumpToMonth(2027, 4)}
-                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
-              >
-                Mai 2027 (Belegt)
-              </button>
-              <button
-                type="button"
-                onClick={() => jumpToMonth(2027, 6)}
-                className="px-2 py-1 rounded-md bg-sky-50 border border-sky-200 text-sky-800 font-medium hover:bg-sky-100 transition-colors cursor-pointer"
-              >
-                Sommer 2027 (Belegt)
-              </button>
             </div>
 
             {/* Validation alert if user clicked invalid range */}
@@ -474,12 +401,8 @@ export function CalendarSection({
                   <span>Ihre Auswahl</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-sky-100 border border-sky-400" />
-                  <span>Belegt (Holidu / Portale)</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded bg-stone-300" />
-                  <span>Gesperrt</span>
+                  <span className="w-3.5 h-3.5 rounded bg-stone-200 border border-stone-300" />
+                  <span>Belegt</span>
                 </div>
               </div>
 
@@ -622,72 +545,6 @@ export function CalendarSection({
             </div>
           </div>
         </div>
-
-        {/* Feeds status and synchronized bookings overview */}
-        <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-white border border-stone-200 shadow-xs space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <h3 className="font-display font-bold text-base sm:text-lg text-stone-900">
-                  Holidu Live-Kalendersynchronisation
-                </h3>
-              </div>
-              <p className="text-xs text-stone-500 mt-0.5">
-                Datenquelle: <span className="font-mono text-2xs text-stone-700 bg-stone-100 px-1.5 py-0.5 rounded">https://api.host.holidu.com/ical/e1tcvw2oaxy-z5ob-vevl.ics</span>
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-xs px-3 py-1 rounded-full bg-sky-50 text-sky-800 font-semibold border border-sky-200">
-                {events.length} Zeiträume synchronisiert
-              </span>
-              <button
-                type="button"
-                onClick={onSyncAllFeeds}
-                disabled={isSyncingAll}
-                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 transition-colors cursor-pointer"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAll ? 'animate-spin text-sky-700' : 'text-stone-600'}`} />
-                <span>{isSyncingAll ? 'Prüfe...' : 'Jetzt aktualisieren'}</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <span className="text-2xs font-bold uppercase tracking-wider text-stone-500">
-              Synchronisierte Buchungen & Sperrzeiten aus Holidu (Portalsperren & Direktbelegungen):
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-1">
-              {events.map((ev, i) => (
-                <div
-                  key={ev.uid || i}
-                  className="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs flex items-center justify-between hover:border-sky-300 transition-colors"
-                >
-                  <div>
-                    <div className="font-semibold text-stone-900 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-sky-500" />
-                      <span>{formatDateGerman(ev.startDate)} – {formatDateGerman(ev.endDate)}</span>
-                    </div>
-                    <div className="text-2xs text-stone-500 mt-0.5">
-                      {ev.summary || 'Belegt'} · Holidu Sync
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const [y, m] = ev.startDate.split('-').map(Number);
-                      jumpToMonth(y, m - 1);
-                    }}
-                    className="text-2xs font-semibold text-sky-700 hover:text-sky-900 underline px-1 py-1 cursor-pointer"
-                  >
-                    Anzeigen &rarr;
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -733,8 +590,8 @@ function DayCell({ day, onClick, onMouseEnter, onMouseLeave }: DayCellProps) {
     bgClass = 'bg-amber-100 text-amber-900 font-medium';
     borderClass = 'border-amber-200';
   } else if (day.isBlocked) {
-    bgClass = 'bg-sky-100 text-sky-900 font-medium border-sky-300';
-    borderClass = 'border-sky-300';
+    bgClass = 'bg-stone-200/80 text-stone-400 font-medium line-through border-stone-300';
+    borderClass = 'border-stone-300';
     cursorClass = 'cursor-not-allowed';
   }
 
@@ -745,16 +602,10 @@ function DayCell({ day, onClick, onMouseEnter, onMouseLeave }: DayCellProps) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       disabled={day.isPast}
-      title={day.blockInfo ? `${day.blockInfo.feedName}: ${day.blockInfo.reason}` : undefined}
+      title={day.isBlocked ? 'Belegt' : undefined}
       className={`relative h-10 w-full rounded-md text-xs flex flex-col items-center justify-center transition-all ${bgClass} ${borderClass} ${cursorClass}`}
     >
       <span>{day.dayNumber}</span>
-      {day.isBlocked && !day.isPast && !day.isCheckIn && !day.isCheckOut && (
-        <span
-          className="absolute bottom-1 w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: day.blockInfo?.color || '#ef4444' }}
-        />
-      )}
     </button>
   );
 }
