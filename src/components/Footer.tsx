@@ -104,7 +104,7 @@ export function Footer({ apartment }: FooterProps) {
                   <h4 className="font-bold text-sm text-stone-900">Angaben gemäß § 5 TMG</h4>
                   <p>
                     <strong>Betreiber der Ferienwohnung:</strong><br />
-                    {apartment.host.name}<br />
+                    Alexander Harms<br />
                     {apartment.address}<br />
                     {apartment.postalCode} {apartment.city}
                   </p>
